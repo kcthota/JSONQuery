@@ -57,4 +57,34 @@ public class QueryTests {
 		boolean result = new Query(node).is(Expr.and(Expr.eq("name", "Krishna"), Expr.eq("age",30)));
 		Assert.assertEquals(false, result);
 	}
+	
+	@Test
+	public void checkOr1(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		
+		boolean result = new Query(node).is(Expr.or(Expr.eq("name", "Krishna"), Expr.eq("age",30)));
+		Assert.assertEquals(true, result);
+	}
+	
+	@Test
+	public void checkOr2(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		
+		boolean result = new Query(node).is(Expr.or(Expr.eq("name", "Krishn"), Expr.eq("age",31)));
+		Assert.assertEquals(true, result);
+	}
+	
+	@Test
+	public void checkOr3(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+
+		boolean result = new Query(node).is(Expr.or(Expr.eq("name", "Krishn"), Expr.eq("age",30)));
+		Assert.assertEquals(false, result);
+	}
 }

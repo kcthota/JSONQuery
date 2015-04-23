@@ -9,6 +9,7 @@ import com.kcthota.JSONQuery.expressions.EqExpression;
 import com.kcthota.JSONQuery.expressions.Expression;
 import com.kcthota.JSONQuery.expressions.MultiExpression;
 import com.kcthota.JSONQuery.expressions.NeExpression;
+import com.kcthota.JSONQuery.expressions.OrExpression;
 
 public class Query {
 	
@@ -36,14 +37,26 @@ public class Query {
 			}
 		} else if(expr instanceof MultiExpression) {
 			MultiExpression castedExpr = (MultiExpression) expr;
+			List<Expression> expressions = castedExpr.getExpressions();
 			if(castedExpr instanceof AndExpression) {
-				List<Expression> expressions = castedExpr.getExpressions();
 				for(Expression curExpr : expressions) {
-					if(!is(curExpr,currentResult)) {
+					currentResult = is(curExpr,currentResult);
+					if(!currentResult) {
 						return false;
 					}
 				}
 				return true;
+			} else if(castedExpr instanceof OrExpression) {
+				for(Expression curExpr : expressions) {
+					currentResult = is(curExpr,currentResult);
+					if(currentResult) {
+						return true;
+					}
+					
+					//reset currentResult for Or
+					currentResult=null;
+				}
+				return false;
 			}
 		}
 		return false;

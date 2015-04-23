@@ -47,4 +47,9 @@ public class Expr {
 		return expression;
 	}
 	
+	public static Expression or(Expression...expressions) {
+		OrExpression expression = new OrExpression(expressions);
+		return expression;
+	}
+	
 }
