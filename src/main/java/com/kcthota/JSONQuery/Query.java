@@ -66,13 +66,17 @@ public class Query {
 		}
 		return false;
 	}
+	
+	public JsonNode value(String property) {
+		return getValue(node, property);
+	}
 
 	private JsonNode getValue(JsonNode node, String property){
 		JsonNode value=null;
 		int index = property.indexOf('.');
 		if(index<0) {
-			value = node.get(property);
-			if(value==null) {
+			value = node.path(property);
+			if(value.isMissingNode()) {
 				throw new RuntimeException("Property doesn't exist: "+property);
 			}
 			return value;
