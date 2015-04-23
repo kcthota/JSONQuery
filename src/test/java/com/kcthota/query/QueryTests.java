@@ -47,4 +47,14 @@ public class QueryTests {
 		boolean result = new Query(node).is(Expr.and(Expr.eq("name", "Krishna"), Expr.ne("age",30)));
 		Assert.assertEquals(true, result);
 	}
+	
+	@Test
+	public void checkAnd3(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		
+		boolean result = new Query(node).is(Expr.and(Expr.eq("name", "Krishna"), Expr.eq("age",30)));
+		Assert.assertEquals(false, result);
+	}
 }
