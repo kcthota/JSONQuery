@@ -20,6 +20,19 @@ public class QueryTests {
 	}
 	
 	@Test
+	public void checkEqHierarchy(){
+		ObjectNode nameNode = new ObjectMapper().createObjectNode();
+		nameNode.put("firstName", "Krishna");
+		nameNode.put("lastName", "Thota");
+		
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
+		
+		boolean result = new Query(node).is(Expr.eq("name.lastName", "Thota"));
+		Assert.assertEquals(true, result);
+	}
+	
+	@Test
 	public void checkNe(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");

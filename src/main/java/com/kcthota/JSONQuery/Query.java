@@ -69,14 +69,16 @@ public class Query {
 
 	private JsonNode getValue(JsonNode node, String property){
 		JsonNode value=null;
-		
-		if(property.indexOf('.')<0) {
+		int index = property.indexOf('.');
+		if(index<0) {
 			value = node.get(property);
 			if(value==null) {
 				throw new RuntimeException("Property doesn't exist: "+property);
 			}
 			return value;
+		} else {
+			String propertyName = property.substring(0, property.indexOf('.'));
+			return getValue(node.get(propertyName), property.substring(index+1));
 		}
-		throw new RuntimeException("hierarchical paths not supported");
 	}
 }
