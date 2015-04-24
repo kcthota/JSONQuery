@@ -3,6 +3,7 @@ package com.kcthota.query;
 import static com.kcthota.JSONQuery.expressions.Expr.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -232,9 +233,13 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		Query q = new Query(node);
-		assertThatThrownBy(() -> {
+		try {
 			q.value("age");
-		}).isInstanceOf(MissingNodeException.class);
+			fail("MissingNodeException expected");
+		} catch(MissingNodeException e) {
+			
+		}
+		
 	}
 	
 }
