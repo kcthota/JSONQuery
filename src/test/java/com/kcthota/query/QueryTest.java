@@ -9,6 +9,8 @@ import static com.kcthota.JSONQuery.expressions.Expr.lt;
 import static com.kcthota.JSONQuery.expressions.Expr.ne;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
+import static com.kcthota.JSONQuery.expressions.Expr.ge;
+import static com.kcthota.JSONQuery.expressions.Expr.le;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -340,6 +342,148 @@ public class QueryTest {
 			fail("UnsupportedExprException when comparing String with Integer");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Lt supports only numeric values of same type for comparison");
+		}
+		
+	}
+	
+	@Test
+	public void testGe(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("float", 10f);
+		node.put("double", 10d);
+		node.put("long", 9223372036854775803l);
+		
+		Query q = new Query(node);
+		
+		boolean result = q.is(ge("int", 10));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("int", 9));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("int", 11));
+		assertThat(result).isFalse();
+		
+		result = q.is(ge("float", 10f));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("float", 9f));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("float", 11f));
+		assertThat(result).isFalse();
+		
+		result = q.is(ge("double", 10d));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("double", 9d));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("double", 11d));
+		assertThat(result).isFalse();
+		
+		result = q.is(ge("long", 9223372036854775803l));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("long", 9223372036854775802l));
+		assertThat(result).isTrue();
+		
+		result = q.is(ge("long", 9223372036854775806l));
+		assertThat(result).isFalse();
+	}
+	
+	@Test
+	public void testGeExceptions(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("String", "value");
+		
+		Query q = new Query(node);
+		
+		try {
+			q.is(ge("int", 11.0));
+			fail("UnsupportedExprException when comparing Int with Float");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Ge supports only numeric values of same type for comparison");
+		}
+		
+		try {
+			q.is(ge("String", 11));
+			fail("UnsupportedExprException when comparing String with Integer");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Ge supports only numeric values of same type for comparison");
+		}
+		
+	}
+	
+	@Test
+	public void testLe(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("float", 10f);
+		node.put("double", 10d);
+		node.put("long", 9223372036854775803l);
+		
+		Query q = new Query(node);
+		
+		boolean result = q.is(le("int", 10));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("int", 11));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("int", 9));
+		assertThat(result).isFalse();
+		
+		result = q.is(le("float", 10f));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("float", 11f));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("float", 9f));
+		assertThat(result).isFalse();
+		
+		result = q.is(le("double", 10d));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("double", 11d));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("double", 9d));
+		assertThat(result).isFalse();
+		
+		result = q.is(le("long", 9223372036854775803l));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("long", 9223372036854775806l));
+		assertThat(result).isTrue();
+		
+		result = q.is(le("long", 9223372036854775802l));
+		assertThat(result).isFalse();
+	}
+	
+	@Test
+	public void testLeExceptions(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("String", "value");
+		
+		Query q = new Query(node);
+		
+		try {
+			q.is(le("int", 11.0));
+			fail("UnsupportedExprException when comparing Int with Float");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Le supports only numeric values of same type for comparison");
+		}
+		
+		try {
+			q.is(le("String", 11));
+			fail("UnsupportedExprException when comparing String with Integer");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Le supports only numeric values of same type for comparison");
 		}
 		
 	}

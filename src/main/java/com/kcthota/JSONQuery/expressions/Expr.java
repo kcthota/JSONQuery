@@ -97,6 +97,46 @@ public class Expr {
 		return expression;
 	}
 	
+	public static Expression ge(String property, Integer value) {
+		GeExpression expression = new GeExpression(property, IntNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression ge(String property, Long value) {
+		GeExpression expression = new GeExpression(property, LongNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression ge(String property, Float value) {
+		GeExpression expression = new GeExpression(property, FloatNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression ge(String property, Double value) {
+		GeExpression expression = new GeExpression(property, DoubleNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression le(String property, Integer value) {
+		LeExpression expression = new LeExpression(property, IntNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression le(String property, Long value) {
+		LeExpression expression = new LeExpression(property, LongNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression le(String property, Float value) {
+		LeExpression expression = new LeExpression(property, FloatNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression le(String property, Double value) {
+		LeExpression expression = new LeExpression(property, DoubleNode.valueOf(value));
+		return expression;
+	}
+	
 	public static Expression and(Expression...expressions) {
 		AndExpression expression = new AndExpression(expressions);
 		return expression;
