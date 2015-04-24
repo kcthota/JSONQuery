@@ -5,14 +5,12 @@ import static com.kcthota.JSONQuery.expressions.Expr.Null;
 import static com.kcthota.JSONQuery.expressions.Expr.and;
 import static com.kcthota.JSONQuery.expressions.Expr.eq;
 import static com.kcthota.JSONQuery.expressions.Expr.gt;
+import static com.kcthota.JSONQuery.expressions.Expr.lt;
 import static com.kcthota.JSONQuery.expressions.Expr.ne;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
-import static com.kcthota.JSONQuery.expressions.Expr.lt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
-
-import java.math.BigInteger;
 
 import org.junit.Test;
 
