@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
+
 import static com.kcthota.JSONQuery.expressions.Expr.*;
 
 public class QueryTest {
@@ -16,6 +18,17 @@ public class QueryTest {
 		node.put("name", "Krishna");
 		
 		boolean result = new Query(node).is(eq("name", "Krishna"));
+		Assert.assertEquals(true, result);
+	}
+	
+	@Test
+	public void testEqArrays(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putArray("names").add("KC").add("Anya");
+		
+		ArrayNode testNode = new ObjectMapper().createArrayNode().add("KC").add("Anya");
+		
+		boolean result = new Query(node).is(eq("names", testNode));
 		Assert.assertEquals(true, result);
 	}
 	

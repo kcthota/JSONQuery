@@ -22,10 +22,21 @@ public class Query {
 		this.node = node;
 	}
 
+	/**
+	 * Verifies if the passed expression is true for the JsonNode
+	 * @param expr
+	 * @return
+	 */
 	public boolean is(Expression expr) {
 		return is(expr, null);
 	}
 
+	/**
+	 * Evaluates the passed expression on the JsonNode
+	 * @param expr
+	 * @param currentResult
+	 * @return
+	 */
 	private boolean is(Expression expr, Boolean currentResult) {
 		// at any time if currentResult is false, stop and return false;
 		if (currentResult != null && !currentResult)
@@ -66,17 +77,27 @@ public class Query {
 				NotExpression castedExpr = (NotExpression) expr;
 				return !is(castedExpr.getExpression(), null);
 			}
-		} catch (Exception e) {
-			// ignore exception and return false for now.
-			// TODO handle exceptions
+		} catch (MissingNodeException e) {
+			return false;
 		}
+		
 		return false;
 	}
 
+	/**
+	 * Gets the value for the property from the JsonNode
+	 * @param property
+	 * @return
+	 */
 	public JsonNode value(String property) {
 		return getValue(node, property);
 	}
 
+	/**
+	 * Checks if property exist in the JsonNode
+	 * @param property
+	 * @return
+	 */
 	public boolean isExist(String property) {
 		try {
 			getValue(node, property);
@@ -86,6 +107,12 @@ public class Query {
 		return true;
 	}
 
+	/**
+	 * Fetches the value for a property from the passed JsonNode. Throws MissingNodeException if the property doesn't exist
+	 * @param node
+	 * @param property
+	 * @return
+	 */
 	private JsonNode getValue(JsonNode node, String property) {
 		if(node==null) {
 			throw new MissingNodeException(property + " is missing");
@@ -105,6 +132,12 @@ public class Query {
 		}
 	}
 	
+	/**
+	 * Gets next Index of (dot) in the passed property name. ignores dots preceded by \ 
+	 * @param property
+	 * @param startIndex
+	 * @return
+	 */
 	private int getNextIndex(String property, int startIndex) {
 		int index = property.indexOf('.',startIndex);
 		if(index>0 && property.charAt(index-1)=='\\') {
@@ -113,6 +146,11 @@ public class Query {
 		return index;
 	}
 	
+	/**
+	 * Formats the property name. Example: converts a\.b to a.b.
+	 * @param property
+	 * @return
+	 */
 	private String formatPropertyName(String property) {
 		return property.replace("\\.", ".");
 	}

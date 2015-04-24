@@ -1,10 +1,16 @@
 package com.kcthota.JSONQuery.expressions;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.LongNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
+/**
+ * Expression helper to create expressions
+ * @author Krishna Chaitanya Thota
+ * Apr 23, 2015 9:25:26 PM
+ */
 public class Expr {
 	
 	public static Expression eq(String property, String value) {
@@ -17,6 +23,10 @@ public class Expr {
 	
 	public static Expression eq(String property, Long value) {
 		return eq(property, LongNode.valueOf(value));
+	}
+	
+	public static Expression eq(String property, boolean value) {
+		return eq(property, BooleanNode.valueOf(value));
 	}
 	
 	public static Expression eq(String property, JsonNode value) {
