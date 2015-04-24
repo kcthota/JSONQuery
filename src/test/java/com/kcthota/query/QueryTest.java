@@ -1,9 +1,13 @@
 package com.kcthota.query;
 
-import static com.kcthota.JSONQuery.expressions.Expr.*;
+import static com.kcthota.JSONQuery.expressions.Expr.Null;
+import static com.kcthota.JSONQuery.expressions.Expr.and;
+import static com.kcthota.JSONQuery.expressions.Expr.eq;
+import static com.kcthota.JSONQuery.expressions.Expr.ne;
+import static com.kcthota.JSONQuery.expressions.Expr.not;
+import static com.kcthota.JSONQuery.expressions.Expr.or;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
