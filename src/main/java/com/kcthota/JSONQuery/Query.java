@@ -7,8 +7,10 @@ import com.kcthota.JSONQuery.expressions.AndExpression;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.EqExpression;
 import com.kcthota.JSONQuery.expressions.Expression;
+import com.kcthota.JSONQuery.expressions.IsNullExpression;
 import com.kcthota.JSONQuery.expressions.MultiExpression;
 import com.kcthota.JSONQuery.expressions.NeExpression;
+import com.kcthota.JSONQuery.expressions.NotExpression;
 import com.kcthota.JSONQuery.expressions.OrExpression;
 
 public class Query {
@@ -31,7 +33,7 @@ public class Query {
 		try {
 			if (expr instanceof ComparisonExpression) {
 				ComparisonExpression castedExpr = (ComparisonExpression) expr;
-				if (castedExpr instanceof EqExpression) {
+				if (castedExpr instanceof EqExpression || castedExpr instanceof IsNullExpression) {
 					return getValue(node, castedExpr.property()).equals(castedExpr.value());
 				} else if (expr instanceof NeExpression) {
 					return !getValue(node, castedExpr.property()).equals(castedExpr.value());
@@ -59,6 +61,9 @@ public class Query {
 					}
 					return false;
 				}
+			} else if (expr instanceof NotExpression) {
+				NotExpression castedExpr = (NotExpression) expr;
+				return !is(castedExpr.getExpression(), null);
 			}
 		} catch (Exception e) {
 			//ignore exception and return false for now.

@@ -52,4 +52,14 @@ public class Expr {
 		return expression;
 	}
 	
+	public static Expression Null(String property) {
+		IsNullExpression expression = new IsNullExpression(property);
+		return expression;
+	}
+	
+	public static Expression not(Expression expr) {
+		NotExpression expression = new NotExpression(expr);
+		return expression;
+	}
+	
 }
