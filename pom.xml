@@ -4,6 +4,29 @@
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>JSONQuery</name>
+
+	<description>Helps querying Jackson JSONNode objects with varieties of expressions</description>
+	<inceptionYear>2015</inceptionYear>
+	<developers>
+		<developer>
+			<id>kcthota</id>
+			<name>Krishna Chaitanya Thota</name>
+			<email>kcthota at gmail dot com</email>
+			<url>https://github.com/kcthota</url>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://github.com/kcthota/JSONQuery.git</connection>
+		<developerConnection>scm:git:git@github.com:kcthota/JSONQuery.git</developerConnection>
+		<url>https://github.com/kcthota/JSONQuery</url>
+	</scm>
 	<properties>
 		<jackson.version>2.5.2</jackson.version>
 		<junit.version>4.11</junit.version>
@@ -41,18 +64,18 @@
 					<version>2.18.1</version>
 				</plugin>
 				<plugin>
-				    <groupId>org.apache.maven.plugins</groupId>
-				    <artifactId>maven-compiler-plugin</artifactId>
-				    <version>3.0</version>
-				    <configuration>
-				        <source>1.7</source>
-				        <target>1.7</target>
-				        <testSource>1.7</testSource>
-				        <testTarget>1.7</testTarget>
-				    </configuration>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<testSource>1.7</testSource>
+						<testTarget>1.7</testTarget>
+					</configuration>
 				</plugin>
 			</plugins>
-			
+
 		</pluginManagement>
 	</build>
 </project>
