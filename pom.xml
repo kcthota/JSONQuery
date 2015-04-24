@@ -5,7 +5,6 @@
 	<artifactId>JSONQuery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JSONQuery</name>
-
 	<description>Helps querying Jackson JSONNode objects with varieties of expressions</description>
 	<inceptionYear>2015</inceptionYear>
 	<developers>
