@@ -162,4 +162,19 @@ public class QueryTests {
 		boolean result = new Query(node).is(not(and(and(eq("name", "Krishna"), eq("age",30)), eq("sex", "M"))));
 		Assert.assertEquals(true, result);
 	}
+	
+	@Test
+	public void checkIsExist(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		node.put("sex", "M");
+
+		boolean result = new Query(node).isExist("name");
+		Assert.assertEquals(true, result);
+		
+		result = new Query(node).isExist("name1");
+		Assert.assertEquals(false, result);
+	}
+	
 }

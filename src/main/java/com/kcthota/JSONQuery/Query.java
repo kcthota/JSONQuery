@@ -3,6 +3,7 @@ package com.kcthota.JSONQuery;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.expressions.AndExpression;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.EqExpression;
@@ -66,28 +67,37 @@ public class Query {
 				return !is(castedExpr.getExpression(), null);
 			}
 		} catch (Exception e) {
-			//ignore exception and return false for now.
-			//TODO handle exceptions
+			// ignore exception and return false for now.
+			// TODO handle exceptions
 		}
 		return false;
 	}
-	
+
 	public JsonNode value(String property) {
 		return getValue(node, property);
 	}
 
-	private JsonNode getValue(JsonNode node, String property){
-		JsonNode value=null;
+	public boolean isExist(String property) {
+		try {
+			getValue(node, property);
+		} catch (MissingNodeException e) {
+			return false;
+		}
+		return true;
+	}
+
+	private JsonNode getValue(JsonNode node, String property) {
+		JsonNode value = null;
 		int index = property.indexOf('.');
-		if(index<0) {
+		if (index < 0) {
 			value = node.path(property);
-			if(value.isMissingNode()) {
-				throw new RuntimeException("Property doesn't exist: "+property);
+			if (value.isMissingNode()) {
+				throw new MissingNodeException(property + " is missing");
 			}
 			return value;
 		} else {
 			String propertyName = property.substring(0, property.indexOf('.'));
-			return getValue(node.get(propertyName), property.substring(index+1));
+			return getValue(node.get(propertyName), property.substring(index + 1));
 		}
 	}
 }
