@@ -2,6 +2,8 @@ package com.kcthota.JSONQuery.expressions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.BooleanNode;
+import com.fasterxml.jackson.databind.node.DoubleNode;
+import com.fasterxml.jackson.databind.node.FloatNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.LongNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -46,9 +48,32 @@ public class Expr {
 		return ne(property, LongNode.valueOf(value));
 	}
 	
+	public static Expression ne(String property, boolean value) {
+		return ne(property, BooleanNode.valueOf(value));
+	}
 
 	public static Expression ne(String property, JsonNode value) {
 		NeExpression expression = new NeExpression(property, value);
+		return expression;
+	}
+	
+	public static Expression gt(String property, Integer value) {
+		GtExpression expression = new GtExpression(property, IntNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression gt(String property, Long value) {
+		GtExpression expression = new GtExpression(property, LongNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression gt(String property, Float value) {
+		GtExpression expression = new GtExpression(property, FloatNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression gt(String property, Double value) {
+		GtExpression expression = new GtExpression(property, DoubleNode.valueOf(value));
 		return expression;
 	}
 	

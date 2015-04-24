@@ -1,13 +1,17 @@
 package com.kcthota.query;
 
+
 import static com.kcthota.JSONQuery.expressions.Expr.Null;
 import static com.kcthota.JSONQuery.expressions.Expr.and;
 import static com.kcthota.JSONQuery.expressions.Expr.eq;
+import static com.kcthota.JSONQuery.expressions.Expr.gt;
 import static com.kcthota.JSONQuery.expressions.Expr.ne;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
+
+import java.math.BigInteger;
 
 import org.junit.Test;
 
@@ -16,6 +20,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
+import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 
 public class QueryTest {
 	
@@ -242,6 +247,53 @@ public class QueryTest {
 			fail("MissingNodeException expected");
 		} catch(MissingNodeException e) {
 			
+		}
+		
+	}
+	
+	@Test
+	public void testGt(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("float", 10f);
+		node.put("double", 10d);
+		node.put("long", 9223372036854775806l);
+		
+		Query q = new Query(node);
+		
+		boolean result = q.is(gt("int", 9));
+		assertThat(result).isTrue();
+		
+		result = q.is(gt("float", 9f));
+		assertThat(result).isTrue();
+		
+		result = q.is(gt("double", 9d));
+		assertThat(result).isTrue();
+		
+		result = q.is(gt("long", 9l));
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void testGtExceptions(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("String", "value");
+		
+		Query q = new Query(node);
+		
+		try {
+			q.is(gt("int", 9.0));
+			fail("UnsupportedExprException when comparing Int with Float");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Gt supports only numeric values of same type for comparison");
+		}
+		
+		try {
+			q.is(gt("String", 9));
+			fail("UnsupportedExprException when comparing String with Integer");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Gt supports only numeric values of same type for comparison");
 		}
 		
 	}
