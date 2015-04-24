@@ -177,4 +177,39 @@ public class QueryTests {
 		Assert.assertEquals(false, result);
 	}
 	
+	@Test
+	public void checkIsExistHierarchy(){
+		ObjectNode nameNode = new ObjectMapper().createObjectNode();
+		nameNode.put("firstName", "Krishna");
+		nameNode.put("lastName", "Thota");
+		
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
+		
+		boolean result = new Query(node).isExist("name.lastName");
+		Assert.assertEquals(true, result);
+		
+		result = new Query(node).isExist("name.middleName");
+		Assert.assertEquals(false, result);
+		
+		result = new Query(node).isExist("name.test.middleName");
+		Assert.assertEquals(false, result);
+	}
+	
+	@Test
+	public void checkPropertyWithDot(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name.first", "Krishna");
+		node.put("name.last", "Thota");
+		
+		Query q = new Query(node);
+		boolean result = q.isExist("name\\.first");
+		Assert.assertEquals(true, result);
+
+		result = q.isExist("name\\.first\\.name");
+		Assert.assertEquals(false, result);
+		
+		Assert.assertEquals("Krishna",q.value("name\\.first").asText());
+	}
+	
 }

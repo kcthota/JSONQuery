@@ -87,10 +87,14 @@ public class Query {
 	}
 
 	private JsonNode getValue(JsonNode node, String property) {
+		if(node==null) {
+			throw new MissingNodeException(property + " is missing");
+		}
+		
 		JsonNode value = null;
-		int index = property.indexOf('.');
+		int index = getNextIndex(property, 0);
 		if (index < 0) {
-			value = node.path(property);
+			value = node.path(formatPropertyName(property));
 			if (value.isMissingNode()) {
 				throw new MissingNodeException(property + " is missing");
 			}
@@ -99,5 +103,17 @@ public class Query {
 			String propertyName = property.substring(0, property.indexOf('.'));
 			return getValue(node.get(propertyName), property.substring(index + 1));
 		}
+	}
+	
+	private int getNextIndex(String property, int startIndex) {
+		int index = property.indexOf('.',startIndex);
+		if(index>0 && property.charAt(index-1)=='\\') {
+			return getNextIndex(formatPropertyName(property), index);
+		}
+		return index;
+	}
+	
+	private String formatPropertyName(String property) {
+		return property.replace("\\.", ".");
 	}
 }
