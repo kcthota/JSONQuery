@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import static com.kcthota.JSONQuery.expressions.Expr.*;
 
-public class QueryTests {
+public class QueryTest {
 	
 	@Test
-	public void checkEq(){
+	public void testEq(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		
@@ -20,7 +20,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkEqHierarchy(){
+	public void testEqHierarchy(){
 		ObjectNode nameNode = new ObjectMapper().createObjectNode();
 		nameNode.put("firstName", "Krishna");
 		nameNode.put("lastName", "Thota");
@@ -33,7 +33,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkNe(){
+	public void testNe(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		
@@ -42,7 +42,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkAnd1(){
+	public void testAnd1(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -52,7 +52,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkAnd2(){
+	public void testAnd2(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -62,7 +62,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkAnd3(){
+	public void testAnd3(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -72,7 +72,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkOr1(){
+	public void testOr1(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -82,7 +82,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkOr2(){
+	public void testOr2(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -92,7 +92,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkOr3(){
+	public void testOr3(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -102,7 +102,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkAndOr1(){
+	public void testAndOr1(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -113,7 +113,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkAndOr2(){
+	public void testAndOr2(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -124,7 +124,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkMultipleAnd(){
+	public void testMultipleAnd(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -135,7 +135,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkNull(){
+	public void testNull(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", (String) null);
@@ -144,7 +144,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkNotNull(){
+	public void testNotNull(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", (String) null);
@@ -153,7 +153,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkNotWithMultipleAnd(){
+	public void testNotWithMultipleAnd(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -164,7 +164,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkIsExist(){
+	public void testIsExist(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
@@ -178,7 +178,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkIsExistHierarchy(){
+	public void testIsExistHierarchy(){
 		ObjectNode nameNode = new ObjectMapper().createObjectNode();
 		nameNode.put("firstName", "Krishna");
 		nameNode.put("lastName", "Thota");
@@ -197,7 +197,7 @@ public class QueryTests {
 	}
 	
 	@Test
-	public void checkPropertyWithDot(){
+	public void testPropertyWithDot(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name.first", "Krishna");
 		node.put("name.last", "Thota");
