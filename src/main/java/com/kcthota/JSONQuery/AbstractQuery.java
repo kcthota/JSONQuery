@@ -11,8 +11,11 @@ import com.kcthota.JSONQuery.expressions.AndExpression;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.EqExpression;
 import com.kcthota.JSONQuery.expressions.Expression;
+import com.kcthota.JSONQuery.expressions.GeExpression;
 import com.kcthota.JSONQuery.expressions.GtExpression;
 import com.kcthota.JSONQuery.expressions.IsNullExpression;
+import com.kcthota.JSONQuery.expressions.LeExpression;
+import com.kcthota.JSONQuery.expressions.LtExpression;
 import com.kcthota.JSONQuery.expressions.MultiExpression;
 import com.kcthota.JSONQuery.expressions.NeExpression;
 import com.kcthota.JSONQuery.expressions.NotExpression;
@@ -57,6 +60,15 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 				} else if (expr instanceof GtExpression) {
 					JsonNode propValue = getValue(node, castedExpr.property());
 					return doGt(castedExpr, propValue);
+				} else if (expr instanceof LtExpression) {
+					JsonNode propValue = getValue(node, castedExpr.property());
+					return doLt(castedExpr, propValue);
+				} else if (expr instanceof GeExpression) {
+					JsonNode propValue = getValue(node, castedExpr.property());
+					return doGe(castedExpr, propValue);
+				} else if (expr instanceof LeExpression) {
+					JsonNode propValue = getValue(node, castedExpr.property());
+					return doLe(castedExpr, propValue);
 				}
 			} else if (expr instanceof MultiExpression) {
 				MultiExpression castedExpr = (MultiExpression) expr;

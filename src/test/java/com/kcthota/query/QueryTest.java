@@ -8,6 +8,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.gt;
 import static com.kcthota.JSONQuery.expressions.Expr.ne;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
+import static com.kcthota.JSONQuery.expressions.Expr.lt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -298,4 +299,50 @@ public class QueryTest {
 		
 	}
 	
+	@Test
+	public void testLt(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("float", 10f);
+		node.put("double", 10d);
+		node.put("long", 9223372036854775806l);
+		
+		Query q = new Query(node);
+		
+		boolean result = q.is(lt("int", 11));
+		assertThat(result).isTrue();
+		
+		result = q.is(lt("float", 11f));
+		assertThat(result).isTrue();
+		
+		result = q.is(lt("double", 11d));
+		assertThat(result).isTrue();
+		
+		result = q.is(lt("long", 9223372036854775807l));
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void testLtExceptions(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("int", 10);
+		node.put("String", "value");
+		
+		Query q = new Query(node);
+		
+		try {
+			q.is(lt("int", 11.0));
+			fail("UnsupportedExprException when comparing Int with Float");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Lt supports only numeric values of same type for comparison");
+		}
+		
+		try {
+			q.is(lt("String", 11));
+			fail("UnsupportedExprException when comparing String with Integer");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Lt supports only numeric values of same type for comparison");
+		}
+		
+	}
 }

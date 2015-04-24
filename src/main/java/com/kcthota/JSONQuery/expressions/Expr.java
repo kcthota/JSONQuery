@@ -77,6 +77,26 @@ public class Expr {
 		return expression;
 	}
 	
+	public static Expression lt(String property, Integer value) {
+		LtExpression expression = new LtExpression(property, IntNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression lt(String property, Long value) {
+		LtExpression expression = new LtExpression(property, LongNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression lt(String property, Float value) {
+		LtExpression expression = new LtExpression(property, FloatNode.valueOf(value));
+		return expression;
+	}
+	
+	public static Expression lt(String property, Double value) {
+		LtExpression expression = new LtExpression(property, DoubleNode.valueOf(value));
+		return expression;
+	}
+	
 	public static Expression and(Expression...expressions) {
 		AndExpression expression = new AndExpression(expressions);
 		return expression;
