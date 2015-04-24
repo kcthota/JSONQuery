@@ -1,14 +1,16 @@
 package com.kcthota.query;
 
-import org.junit.Assert;
+import static com.kcthota.JSONQuery.expressions.Expr.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
-
-import static com.kcthota.JSONQuery.expressions.Expr.*;
+import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 
 public class QueryTest {
 	
@@ -18,7 +20,7 @@ public class QueryTest {
 		node.put("name", "Krishna");
 		
 		boolean result = new Query(node).is(eq("name", "Krishna"));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -29,7 +31,7 @@ public class QueryTest {
 		ArrayNode testNode = new ObjectMapper().createArrayNode().add("KC").add("Anya");
 		
 		boolean result = new Query(node).is(eq("names", testNode));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -42,7 +44,7 @@ public class QueryTest {
 		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
 		
 		boolean result = new Query(node).is(eq("name.lastName", "Thota"));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -51,7 +53,7 @@ public class QueryTest {
 		node.put("name", "Krishna");
 		
 		boolean result = new Query(node).is(ne("name", "kri"));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -61,7 +63,7 @@ public class QueryTest {
 		node.put("age", 31);
 		
 		boolean result = new Query(node).is(and(eq("name", "Krishna"), eq("age",31)));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -71,7 +73,7 @@ public class QueryTest {
 		node.put("age", 31);
 		
 		boolean result = new Query(node).is(and(eq("name", "Krishna"), ne("age",30)));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -81,7 +83,7 @@ public class QueryTest {
 		node.put("age", 31);
 		
 		boolean result = new Query(node).is(and(eq("name", "Krishna"), eq("age",30)));
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -91,7 +93,7 @@ public class QueryTest {
 		node.put("age", 31);
 		
 		boolean result = new Query(node).is(or(eq("name", "Krishna"), eq("age",30)));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -101,7 +103,7 @@ public class QueryTest {
 		node.put("age", 31);
 		
 		boolean result = new Query(node).is(or(eq("name", "Krishn"), eq("age",31)));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -111,7 +113,7 @@ public class QueryTest {
 		node.put("age", 31);
 
 		boolean result = new Query(node).is(or(eq("name", "Krishn"), eq("age",30)));
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -122,7 +124,7 @@ public class QueryTest {
 		node.put("sex", "M");
 
 		boolean result = new Query(node).is(and(or(eq("name", "Krishna"), eq("age",30)), eq("sex", "M")));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -133,7 +135,7 @@ public class QueryTest {
 		node.put("sex", "M");
 
 		boolean result = new Query(node).is(or(and(eq("name", "Krishna"), eq("age",30)), eq("sex", "M")));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -144,7 +146,7 @@ public class QueryTest {
 		node.put("sex", "M");
 
 		boolean result = new Query(node).is(and(and(eq("name", "Krishna"), eq("age",30)), eq("sex", "M")));
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -153,7 +155,7 @@ public class QueryTest {
 		node.put("name", "Krishna");
 		node.put("age", (String) null);
 		boolean result = new Query(node).is(Null("age"));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -162,7 +164,7 @@ public class QueryTest {
 		node.put("name", "Krishna");
 		node.put("age", (String) null);
 		boolean result = new Query(node).is(not(Null("name")));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -173,7 +175,7 @@ public class QueryTest {
 		node.put("sex", "M");
 
 		boolean result = new Query(node).is(not(and(and(eq("name", "Krishna"), eq("age",30)), eq("sex", "M"))));
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -184,10 +186,10 @@ public class QueryTest {
 		node.put("sex", "M");
 
 		boolean result = new Query(node).isExist("name");
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 		
 		result = new Query(node).isExist("name1");
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -200,13 +202,13 @@ public class QueryTest {
 		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
 		
 		boolean result = new Query(node).isExist("name.lastName");
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 		
 		result = new Query(node).isExist("name.middleName");
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 		
 		result = new Query(node).isExist("name.test.middleName");
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 	}
 	
 	@Test
@@ -217,12 +219,22 @@ public class QueryTest {
 		
 		Query q = new Query(node);
 		boolean result = q.isExist("name\\.first");
-		Assert.assertEquals(true, result);
+		assertThat(result).isTrue();
 
 		result = q.isExist("name\\.first\\.name");
-		Assert.assertEquals(false, result);
+		assertThat(result).isFalse();
 		
-		Assert.assertEquals("Krishna",q.value("name\\.first").asText());
+		assertThat(q.value("name\\.first").asText()).isEqualTo("Krishna");
+	}
+	
+	@Test
+	public void testMissingNodeException(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		Query q = new Query(node);
+		assertThatThrownBy(() -> {
+			q.value("age");
+		}).isInstanceOf(MissingNodeException.class);
 	}
 	
 }
