@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
+import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 import com.kcthota.JSONQuery.expressions.AndExpression;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.EqExpression;
@@ -20,6 +21,7 @@ import com.kcthota.JSONQuery.expressions.MultiExpression;
 import com.kcthota.JSONQuery.expressions.NeExpression;
 import com.kcthota.JSONQuery.expressions.NotExpression;
 import com.kcthota.JSONQuery.expressions.OrExpression;
+import com.kcthota.JSONQuery.expressions.SubstringOf;
 
 /**
  * @author Krishna Chaitanya Thota
@@ -69,6 +71,12 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 				} else if (expr instanceof LeExpression) {
 					JsonNode propValue = getValue(node, castedExpr.property());
 					return doLe(castedExpr, propValue);
+				} else if (expr instanceof SubstringOf) {
+					JsonNode propValue = getValue(node, castedExpr.property());
+					if(!propValue.isTextual() || !castedExpr.value().isTextual()) {
+						return false;
+					}
+					return propValue.textValue().contains(castedExpr.value().textValue());
 				}
 			} else if (expr instanceof MultiExpression) {
 				MultiExpression castedExpr = (MultiExpression) expr;

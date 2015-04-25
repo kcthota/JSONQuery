@@ -157,4 +157,9 @@ public class Expr {
 		return expression;
 	}
 	
+	public static Expression substringof(String property, String value) {
+		SubstringOf expression = new SubstringOf(property, TextNode.valueOf(value));
+		return expression;
+	}
+	
 }

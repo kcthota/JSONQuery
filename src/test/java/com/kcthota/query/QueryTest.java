@@ -10,7 +10,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.ne;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
 import static com.kcthota.JSONQuery.expressions.Expr.ge;
-import static com.kcthota.JSONQuery.expressions.Expr.le;
+import static com.kcthota.JSONQuery.expressions.Expr.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -492,5 +492,26 @@ public class QueryTest {
 			assertThat(e.getMessage()).isEqualTo("Le supports only numeric values of same type for comparison");
 		}
 		
+	}
+	
+	@Test
+	public void testSubstringof(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		node.put("state", "CA");
+		
+		Query q = new Query(node);
+		boolean result = q.is(substringof("name", "Kris"));
+		assertThat(result).isTrue();
+		
+		result = q.is(substringof("age", "Kris")); //age not a string, returns false
+		assertThat(result).isFalse();
+		
+		result = q.is(not(substringof("name", "Kris")));
+		assertThat(result).isFalse();
+		
+		result = q.is(and(eq("state","CA"), substringof("name", "Kris")));
+		assertThat(result).isTrue();
 	}
 }
