@@ -37,9 +37,11 @@ Checks if the passed in expression is true for the object.
 ```
 new Query(node).is(eq("state", "CA")); //returns true
 
-new Query(node).is(eq("name.first", "Jane")); //returns false
+new Query(node).is(eq("name/first", "Jane")); //returns false
 
-new Query(node).is(eq("name.last", "Doe")); //returns true
+new Query(node).is(eq("name/last", "Doe")); //returns true
+
+new Query(node).is(eq("name/interests/1", "hiking")); //returns true
 ```
 
 **Not Equals**
@@ -47,7 +49,7 @@ new Query(node).is(eq("name.last", "Doe")); //returns true
 ```
 new Query(node).is(ne("state", "CA")); //returns false
 
-new Query(node).is(ne("name.first", "Jane")); //returns true
+new Query(node).is(ne("name/first", "Jane")); //returns true
 
 new Query(node).is(ne("age", 35)); //returns true
 ```
@@ -87,9 +89,9 @@ new Query(node).is(Null("state")); //returns false
 ```
 new Query(node).is(not(eq("state", "CA"))); //returns false
 
-new Query(node).is(not(eq("name.first", "Jane"))); //returns true
+new Query(node).is(not(eq("name/first", "Jane"))); //returns true
 
-new Query(node).is(not(eq("name.last", "Doe"))); //returns false
+new Query(node).is(not(eq("name/last", "Doe"))); //returns false
 
 new Query(node).is(not(Null("state"))); //returns true
 ```
@@ -97,25 +99,25 @@ new Query(node).is(not(Null("state"))); //returns true
 **AND**
 
 ```
-new Query(node).is(and(eq("name.first", "John"), eq("age",31))); //returns true
+new Query(node).is(and(eq("name/first", "John"), eq("age",31))); //returns true
 
-new Query(node).is(and(eq("name.first", "John"), ne("age",31))); //returns false
+new Query(node).is(and(eq("name/first", "John"), ne("age",31))); //returns false
 ```
 
 **OR**
 
 ```
-new Query(node).is(or(eq("name.first", "John"), eq("age",31))); //returns true
+new Query(node).is(or(eq("name/first", "John"), eq("age",31))); //returns true
 
-new Query(node).is(or(eq("name.first", "John"), ne("age",31))); //returns true
+new Query(node).is(or(eq("name/first", "John"), ne("age",31))); //returns true
 ```
 
 **Multiple AND/OR**
 
 ```
-new Query(node).is(or(and(eq("name.first", "John"), eq("age",31)), eq("state", "FL"))); //returns true
+new Query(node).is(or(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns true
 
-new Query(node).is(and(and(eq("name.first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
+new Query(node).is(and(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
 ```
 
 ###isExist
@@ -126,7 +128,7 @@ new Query(node).isExist("age"); //returns true
 
 new Query(node).isExist("name1"); //returns false
 
-new Query(node).isExist("name.middle"); //returns false
+new Query(node).isExist("name/middle"); //returns false
 
 ```
 
@@ -134,11 +136,13 @@ new Query(node).isExist("name.middle"); //returns false
 Retrieves the value for a property in the JsonNode
 
 ```
-new Query(node).value("name.first").textValue(); //returns John
+new Query(node).value("name/first").textValue(); //returns John
 
 new Query(node).value("name"); //returns the JsonNode object for name.
 
 new Query(node).value("city"); //throws MissingNodeException
+
+new Query(node).value("name/interests/1").textValue(); //returns hiking
 ```
 
 Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.

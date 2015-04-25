@@ -124,31 +124,6 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 			throw new MissingNodeException(property + " is missing");
 		}
 		return value;	
-		/*int index = getNextIndex(property, 0);
-		if (index < 0) {
-			value = node.at(formatPropertyName(property));
-			if (value.isMissingNode()) {
-				throw new MissingNodeException(property + " is missing");
-			}
-			return value;
-		} else {
-			String propertyName = property.substring(0, property.indexOf('.'));
-			return getValue(node.get(propertyName), property.substring(index + 1));
-		}*/
-	}
-	
-	/**
-	 * Gets next Index of (dot) in the passed property name. ignores dots preceded by \ 
-	 * @param property
-	 * @param startIndex
-	 * @return
-	 */
-	protected int getNextIndex(String property, int startIndex) {
-		int index = property.indexOf('.',startIndex);
-		if(index>0 && property.charAt(index-1)=='\\') {
-			return getNextIndex(formatPropertyName(property), index);
-		}
-		return index;
 	}
 	
 	/**
@@ -161,6 +136,5 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 			return "/"+property;
 		}
 		return property;
-		//return property.replace("\\.", ".");
 	}
 }
