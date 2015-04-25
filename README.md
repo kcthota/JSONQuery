@@ -120,6 +120,14 @@ new Query(node).is(or(and(eq("name/first", "John"), eq("age",31)), eq("state", "
 new Query(node).is(and(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
 ```
 
+**SubstringOf**
+
+```
+new Query(node).is(substringof("name/first", "Jo")); //returns true
+
+new Query(node).is(substringof("age", "Jo")); //returns false, age value is not string
+```
+
 ###isExist
 Checks if property exist for the JsonNode.
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
-import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 import com.kcthota.JSONQuery.expressions.AndExpression;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.EqExpression;
