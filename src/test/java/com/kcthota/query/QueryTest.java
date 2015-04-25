@@ -43,6 +43,12 @@ public class QueryTest {
 		
 		boolean result = new Query(node).is(eq("names", testNode));
 		assertThat(result).isTrue();
+		
+		result = new Query(node).is(eq("names/0", "KC"));
+		assertThat(result).isTrue();
+		
+		result = new Query(node).is(eq("names/1", "Anya"));
+		assertThat(result).isTrue();
 	}
 	
 	@Test
@@ -54,7 +60,7 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
 		
-		boolean result = new Query(node).is(eq("name.lastName", "Thota"));
+		boolean result = new Query(node).is(eq("name/lastName", "Thota"));
 		assertThat(result).isTrue();
 	}
 	
@@ -212,13 +218,13 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
 		
-		boolean result = new Query(node).isExist("name.lastName");
+		boolean result = new Query(node).isExist("name/lastName");
 		assertThat(result).isTrue();
 		
-		result = new Query(node).isExist("name.middleName");
+		result = new Query(node).isExist("name/middleName");
 		assertThat(result).isFalse();
 		
-		result = new Query(node).isExist("name.test.middleName");
+		result = new Query(node).isExist("name/test/middleName");
 		assertThat(result).isFalse();
 	}
 	
@@ -229,13 +235,13 @@ public class QueryTest {
 		node.put("name.last", "Thota");
 		
 		Query q = new Query(node);
-		boolean result = q.isExist("name\\.first");
+		boolean result = q.isExist("name.first");
 		assertThat(result).isTrue();
 
-		result = q.isExist("name\\.first\\.name");
+		result = q.isExist("name.first.name");
 		assertThat(result).isFalse();
 		
-		assertThat(q.value("name\\.first").asText()).isEqualTo("Krishna");
+		assertThat(q.value("name.first").asText()).isEqualTo("Krishna");
 	}
 	
 	@Test

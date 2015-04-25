@@ -119,10 +119,14 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 			throw new MissingNodeException(property + " is missing");
 		}
 		
-		JsonNode value = null;
-		int index = getNextIndex(property, 0);
+		JsonNode value = node.at(formatPropertyName(property));
+		if (value.isMissingNode()) {
+			throw new MissingNodeException(property + " is missing");
+		}
+		return value;	
+		/*int index = getNextIndex(property, 0);
 		if (index < 0) {
-			value = node.path(formatPropertyName(property));
+			value = node.at(formatPropertyName(property));
 			if (value.isMissingNode()) {
 				throw new MissingNodeException(property + " is missing");
 			}
@@ -130,7 +134,7 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 		} else {
 			String propertyName = property.substring(0, property.indexOf('.'));
 			return getValue(node.get(propertyName), property.substring(index + 1));
-		}
+		}*/
 	}
 	
 	/**
@@ -153,6 +157,10 @@ public abstract class AbstractQuery extends AbstractQueryHelpers {
 	 * @return
 	 */
 	protected String formatPropertyName(String property) {
-		return property.replace("\\.", ".");
+		if(!property.startsWith("/")) {
+			return "/"+property;
+		}
+		return property;
+		//return property.replace("\\.", ".");
 	}
 }
