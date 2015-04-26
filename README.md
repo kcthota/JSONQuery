@@ -187,7 +187,7 @@ new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, 
 **Prepend to**
 
 ```
-new Query(node).value(prependTo("name/first", "K")); //returns KJohn
+new Query(node).value(prependTo("name/first", "K")).textValue(); //returns KJohn
 
 new Query(node).value(prependTo("name/interests/1", "hill ")).textValue(); //returns hill hiking
 
