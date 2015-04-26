@@ -10,8 +10,8 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  */
 public class GtExpression extends SimpleComparisonExpression {
 
-	public GtExpression(String property, JsonNode value) {
-		super(property, value);
+	public GtExpression(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 	
 	@Override

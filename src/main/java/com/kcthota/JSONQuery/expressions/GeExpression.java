@@ -11,8 +11,8 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  */
 public class GeExpression extends SimpleComparisonExpression {
 
-	public GeExpression(String property, JsonNode value) {
-		super(property, value);
+	public GeExpression(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 	
 	@Override

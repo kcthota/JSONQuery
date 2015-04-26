@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class SubstringOf extends SimpleComparisonExpression {
 
-	public SubstringOf(String property, JsonNode value) {
-		super(property, value);
+	public SubstringOf(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 
 	@Override

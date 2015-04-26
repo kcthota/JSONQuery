@@ -21,6 +21,11 @@ public abstract class SimpleComparisonExpression implements ComparisonExpression
 		this.value = value;
 	}
 	
+	public SimpleComparisonExpression(ValueExpression expression, JsonNode value) {
+		this.expr = expression;
+		this.value = value;
+	}
+	
 	/**
 	 * Returns the current ValueExperssion
 	 * @return

@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.node.NullNode;
  */
 public class IsNullExpression extends SimpleComparisonExpression {
 
-	public IsNullExpression(String property) {
-		super(property, NullNode.getInstance());
+	public IsNullExpression(ValueExpression expression) {
+		super(expression, NullNode.getInstance());
 	}
 
 	@Override

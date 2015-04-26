@@ -11,8 +11,8 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  */
 public class LtExpression extends SimpleComparisonExpression {
 
-	public LtExpression(String property, JsonNode value) {
-		super(property, value);
+	public LtExpression(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 	
 	

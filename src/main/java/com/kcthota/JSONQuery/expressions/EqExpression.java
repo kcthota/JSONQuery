@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class EqExpression extends SimpleComparisonExpression {
 
-	public EqExpression(String property, JsonNode value) {
-		super(property, value);
+	public EqExpression(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 
 	@Override

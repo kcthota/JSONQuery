@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class NeExpression extends SimpleComparisonExpression {
 
-	public NeExpression(String property, JsonNode value) {
-		super(property, value);
+	public NeExpression(ValueExpression expression, JsonNode value) {
+		super(expression, value);
 	}
 	
 	@Override
