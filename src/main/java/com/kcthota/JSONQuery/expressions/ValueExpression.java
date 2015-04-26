@@ -15,13 +15,23 @@ public class ValueExpression implements Expression {
 	
 	String property;
 	
+	ValueExpression innerExpression=null;
+	
+	public ValueExpression(String property, ValueExpression innerExpression) {
+		this.property = property;
+		this.innerExpression = innerExpression;
+	}
+	
 	public ValueExpression(String property) {
 		this.property = property;
 	}
 	
 	public JsonNode evaluate(JsonNode node) {
-	
-		return getValue(node, property);
+		if(innerExpression==null) {
+			return getValue(node, property);
+		} else {
+			return getValue(innerExpression.evaluate(node), property);
+		}
 	}
 	
 	/**
@@ -33,6 +43,10 @@ public class ValueExpression implements Expression {
 	protected JsonNode getValue(JsonNode node, String property) {
 		if(node==null) {
 			throw new MissingNodeException(property + " is missing");
+		}
+		
+		if(property==null) {
+			return node;
 		}
 		
 		JsonNode value = node.at(formatPropertyName(property));

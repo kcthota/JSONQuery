@@ -158,7 +158,7 @@ new Query(node).isExist("name/middle"); //returns false
 ```
 
 ###value
-Retrieves the value for a property in the JsonNode
+Retrieves the value of a property in the JsonNode
 
 **as is**
 
@@ -173,16 +173,39 @@ new Query(node).value("name/interests/1").textValue(); //returns hiking
 
 ```
 
-**append to**
+**Append to**
 
 ```
-new Query(node).value(appendTo("name/first", "K")); //returns JohnK
+new Query(node).value(appendTo("name/first", "K")).textValue(); //returns JohnK
 
 new Query(node).value(appendTo("name/interests/1", " hills")).textValue(); //returns hiking hills
 
 new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
+
+**Prepend to**
+
+```
+new Query(node).value(prependTo("name/first", "K")); //returns KJohn
+
+new Query(node).value(prependTo("name/interests/1", "hill ")).textValue(); //returns hill hiking
+
+new Query(node).value(prependTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
+
+```
+
+**Value Expression Combinations**
+
+```
+new Query(node).value(val(val("name"),"first")).textValue(); //returns John
+
+new Query(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
+
+new Query(node).value(appendTo(prependTo("name/interests/1", "hill ")," in CA")).textValue(); //returns hill hiking in CA
+
+```
+
 
 Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
 

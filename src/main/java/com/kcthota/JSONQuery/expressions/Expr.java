@@ -179,7 +179,31 @@ public class Expr {
 		return new ValueExpression(property);
 	}
 	
+	public static ValueExpression val(ValueExpression valExpression, String property) {
+		return new ValueExpression(property, valExpression);
+	}
+	
 	public static ValueExpression appendTo(String property, String appendText) {
 		return new AppendToValueExpression(property, appendText);
+	}
+	
+	public static ValueExpression appendTo(ValueExpression valExpression, String property, String appendText) {
+		return new AppendToValueExpression(property, appendText, valExpression);
+	}
+	
+	public static ValueExpression appendTo(ValueExpression valExpression, String appendText) {
+		return new AppendToValueExpression(null, appendText, valExpression);
+	}
+	
+	public static ValueExpression prependTo(String property, String prependText) {
+		return new PrependToValueExpression(property, prependText);
+	}
+	
+	public static ValueExpression prependTo(ValueExpression valExpression, String property, String prependText) {
+		return new PrependToValueExpression(property, prependText, valExpression);
+	}
+	
+	public static ValueExpression prependTo(ValueExpression valExpression, String prependText) {
+		return new PrependToValueExpression(null, prependText, valExpression);
 	}
 }
