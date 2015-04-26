@@ -3,9 +3,10 @@
 Query JsonNode objects with intuitive expressions.
 
 ##Usage
-The artifacts will soon be available on maven central. Until then you can download from [here] (https://oss.sonatype.org/content/groups/public/com/kcthota/JSONQuery/0.0.1/).
+The artifacts will soon be available on maven central. 
 
 <!--
+Until then you can download from [here] (https://oss.sonatype.org/content/groups/public/com/kcthota/JSONQuery/0.0.1/).
 ```
 <dependency>
 	<groupId>com.kcthota</groupId>
@@ -120,12 +121,28 @@ new Query(node).is(or(and(eq("name/first", "John"), eq("age",31)), eq("state", "
 new Query(node).is(and(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
 ```
 
-**SubstringOf**
+**Substring Of**
 
 ```
 new Query(node).is(substringof("name/first", "Jo")); //returns true
 
 new Query(node).is(substringof("age", "Jo")); //returns false, age value is not string
+```
+
+**Starts With**
+
+```
+new Query(node).is(startsWith("name/first", "Jo")); //returns true
+
+new Query(node).is(startsWith("age", "Jo")); //returns false, age value is not string
+```
+
+**Ends With**
+
+```
+new Query(node).is(endsWith("name/first", "Jo")); //returns false
+
+new Query(node).is(endsWith("age", "Jo")); //returns false, age value is not string
 ```
 
 ###isExist

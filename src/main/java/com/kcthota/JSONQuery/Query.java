@@ -37,6 +37,15 @@ public class Query extends AbstractQuery {
 	public JsonNode value(String property) {
 		return new ValueExpression(property).evaluate(node);
 	}
+	
+	/**
+	 * Gets the value as per expression set from the JsonNode
+	 * @param property
+	 * @return
+	 */
+	public JsonNode value(ValueExpression expression) {
+		return expression.evaluate(node);
+	}
 
 	/**
 	 * Checks if property exist in the JsonNode
@@ -51,5 +60,4 @@ public class Query extends AbstractQuery {
 		}
 		return true;
 	}
-	
 }
