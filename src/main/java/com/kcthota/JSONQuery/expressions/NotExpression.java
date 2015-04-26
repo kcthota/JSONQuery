@@ -1,15 +1,28 @@
 package com.kcthota.JSONQuery.expressions;
 
-public class NotExpression implements Expression {
+import com.fasterxml.jackson.databind.JsonNode;
+
+/**
+ * Negation of the result of passed in comparison expression
+ * @author Krishna Chaitanya Thota
+ * Apr 26, 2015 12:02:46 AM
+ */
+public class NotExpression implements ComparisonExpression {
 	
-	Expression expression;
+	ComparisonExpression expression;
 	
-	public NotExpression(Expression expression) {
-		this.expression = expression;
+	public NotExpression(ComparisonExpression expr) {
+		this.expression = expr;
 	}
 	
-	public Expression getExpression() {
+	public ComparisonExpression getExpression() {
 		return expression;
+	}
+
+
+	@Override
+	public boolean evaluate(JsonNode node) {
+		return !expression.evaluate(node);
 	}
 
 }

@@ -2,7 +2,8 @@ package com.kcthota.JSONQuery;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
-import com.kcthota.JSONQuery.expressions.Expression;
+import com.kcthota.JSONQuery.expressions.ComparisonExpression;
+import com.kcthota.JSONQuery.expressions.ValueExpression;
 
 public class Query extends AbstractQuery {
 
@@ -15,8 +16,16 @@ public class Query extends AbstractQuery {
 	 * @param expr
 	 * @return
 	 */
-	public boolean is(Expression expr) {
-		return is(expr, null);
+	public boolean is(ComparisonExpression expr) {
+		try {
+			if(expr!=null) {
+				return expr.evaluate(node);
+			}
+		} catch (MissingNodeException e) {
+			return false;
+		}
+		
+		return false;
 	}
 
 
@@ -26,7 +35,7 @@ public class Query extends AbstractQuery {
 	 * @return
 	 */
 	public JsonNode value(String property) {
-		return getValue(node, property);
+		return new ValueExpression(property).evaluate(node);
 	}
 
 	/**
@@ -36,12 +45,11 @@ public class Query extends AbstractQuery {
 	 */
 	public boolean isExist(String property) {
 		try {
-			getValue(node, property);
+			new ValueExpression(property).evaluate(node);
 		} catch (MissingNodeException e) {
 			return false;
 		}
 		return true;
 	}
-
 	
 }

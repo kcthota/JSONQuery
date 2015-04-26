@@ -7,23 +7,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NullNode;
 
 /**
+ * Evaluates null
  * @author Krishna Chaitanya Thota
  * Apr 23, 2015 7:02:46 PM
  */
-public class IsNullExpression implements ComparisonExpression {
+public class IsNullExpression extends SimpleComparisonExpression {
 
-	String property;
-	
 	public IsNullExpression(String property) {
-		this.property = property;
-	}
-	public String property() {
-		return property;
+		super(property, NullNode.getInstance());
 	}
 
-
-	public JsonNode value() {
-		return NullNode.getInstance();
+	@Override
+	public boolean evaluate(JsonNode node) {
+		return expression().evaluate(node).equals(NullNode.getInstance());
 	}
-
 }
