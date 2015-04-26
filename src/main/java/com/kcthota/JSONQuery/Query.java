@@ -35,7 +35,7 @@ public class Query extends AbstractQuery {
 	 * @return
 	 */
 	public JsonNode value(String property) {
-		return new ValueExpression(property).evaluate(node);
+		return value(new ValueExpression(property));
 	}
 	
 	/**

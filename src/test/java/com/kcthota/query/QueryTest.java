@@ -53,10 +53,6 @@ public class QueryTest {
 	
 	@Test
 	public void testEqHierarchy(){
-		ObjectNode nameNode = new ObjectMapper().createObjectNode();
-		nameNode.put("firstName", "Krishna");
-		nameNode.put("lastName", "Thota");
-		
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
 		
@@ -245,12 +241,35 @@ public class QueryTest {
 	}
 	
 	@Test
-	public void testMissingNodeException(){
+	public void testMissingNodeException1(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putArray("interests").add("hiking").add("biking");
+		
+		Query q = new Query(node);
+		try {
+			q.value("interests/2");
+			fail("MissingNodeException expected");
+		} catch(MissingNodeException e) {
+			
+		}
+		
+	}
+	
+	@Test
+	public void testMissingNodeException2(){
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
+		
 		Query q = new Query(node);
 		try {
 			q.value("age");
+			fail("MissingNodeException expected");
+		} catch(MissingNodeException e) {
+			
+		}
+		
+		try {
+			q.value("name/0");
 			fail("MissingNodeException expected");
 		} catch(MissingNodeException e) {
 			
@@ -555,5 +574,24 @@ public class QueryTest {
 		
 		result = q.is(and(eq("state","CA"), endsWith("name", "shna")));
 		assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void testValue1(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
+		node.put("city", "Santa Clara");
+		node.putArray("interests").add("hiking").add("biking");
+		
+		Query q=new Query(node);
+		assertThat(q.value("city").textValue()).isEqualTo("Santa Clara");
+		
+		assertThat(q.value("name/firstName").textValue()).isEqualTo("Krishna");
+		
+		assertThat(q.value(val("name/lastName")).textValue()).isEqualTo("Thota");
+		
+		assertThat(q.value(val("interests/0")).textValue()).isEqualTo("hiking");
+		
+		assertThat(q.value("interests/1").textValue()).isEqualTo("biking");
 	}
 }
