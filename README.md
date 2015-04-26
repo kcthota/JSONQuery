@@ -160,6 +160,8 @@ new Query(node).isExist("name/middle"); //returns false
 ###value
 Retrieves the value for a property in the JsonNode
 
+**as is**
+
 ```
 new Query(node).value("name/first").textValue(); //returns John
 
@@ -168,6 +170,18 @@ new Query(node).value("name"); //returns the JsonNode object for name.
 new Query(node).value("city"); //throws MissingNodeException
 
 new Query(node).value("name/interests/1").textValue(); //returns hiking
+
+```
+
+**append to**
+
+```
+new Query(node).value(appendTo("name/first", "K")); //returns JohnK
+
+new Query(node).value(appendTo("name/interests/1", " hills")).textValue(); //returns hiking hills
+
+new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
+
 ```
 
 Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.

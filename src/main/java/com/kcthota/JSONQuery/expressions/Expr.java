@@ -35,6 +35,10 @@ public class Expr {
 		return eq(val(property), value);
 	}
 	
+	public static ComparisonExpression eq(ValueExpression expression, String value) {
+		return eq(expression, TextNode.valueOf(value));
+	}
+	
 	public static ComparisonExpression eq(ValueExpression expression, JsonNode value) {
 		return new EqExpression(expression, value);
 	}
@@ -57,6 +61,10 @@ public class Expr {
 	
 	public static ComparisonExpression ne(String property, JsonNode value) {
 		return ne(val(property), value);
+	}
+	
+	public static ComparisonExpression ne(ValueExpression expression, String value) {
+		return ne(expression, TextNode.valueOf(value));
 	}
 
 	public static ComparisonExpression ne(ValueExpression expression, JsonNode value) {
@@ -169,5 +177,9 @@ public class Expr {
 	
 	public static ValueExpression val(String property) {
 		return new ValueExpression(property);
+	}
+	
+	public static ValueExpression appendTo(String property, String appendText) {
+		return new AppendToValueExpression(property, appendText);
 	}
 }
