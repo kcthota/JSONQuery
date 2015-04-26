@@ -43,6 +43,9 @@ new Query(node).is(eq("name/first", "Jane")); //returns false
 new Query(node).is(eq("name/last", "Doe")); //returns true
 
 new Query(node).is(eq("name/interests/1", "hiking")); //returns true
+
+new Query(node).is(eq(appendTo("state", ", USA"), "CA, USA")); //returns true
+
 ```
 
 **Not Equals**
@@ -53,6 +56,9 @@ new Query(node).is(ne("state", "CA")); //returns false
 new Query(node).is(ne("name/first", "Jane")); //returns true
 
 new Query(node).is(ne("age", 35)); //returns true
+
+new Query(node).is(ne(prependTo("state", "1"), "CA")); //returns true
+
 ```
 
 **Greater than**

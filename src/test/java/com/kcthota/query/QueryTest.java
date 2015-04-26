@@ -30,7 +30,14 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		
-		boolean result = new Query(node).is(eq("name", "Krishna"));
+		Query q = new Query(node);
+		boolean result = q.is(eq("name", "Krishna"));
+		assertThat(result).isTrue();
+		
+		result = q.is(eq(appendTo("name", " C"), "Krishna C"));
+		assertThat(result).isTrue();
+		
+		result = q.is(eq(prependTo(appendTo("name", " C"), "Mr. "), "Mr. Krishna C"));
 		assertThat(result).isTrue();
 	}
 	
@@ -65,8 +72,13 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		
-		boolean result = new Query(node).is(ne("name", "kri"));
+		Query q = new Query(node);
+		
+		boolean result = q.is(ne("name", "kri"));
 		assertThat(result).isTrue();
+		
+		result = q.is(ne(prependTo("name", "Mr. "), "Mr. Krishna"));
+		assertThat(result).isFalse();
 	}
 	
 	@Test
