@@ -144,7 +144,27 @@ public class Expr {
 	}
 	
 	public static ComparisonExpression substringof(String property, String value) {
-		return new SubstringOf(val(property), TextNode.valueOf(value));
+		return substringof(val(property), value);
+	}
+	
+	public static ComparisonExpression substringof(ValueExpression expression, String value) {
+		return new SubstringOfExpression(expression, TextNode.valueOf(value));
+	}
+	
+	public static ComparisonExpression startsWith(String property, String value) {
+		return startsWith(val(property), value);
+	}
+	
+	public static ComparisonExpression startsWith(ValueExpression expression, String value) {
+		return new StartsWithExpression(expression, TextNode.valueOf(value));
+	}
+	
+	public static ComparisonExpression endsWith(String property, String value) {
+		return endsWith(val(property), value);
+	}
+	
+	public static ComparisonExpression endsWith(ValueExpression expression, String value) {
+		return new EndsWithExpression(expression, TextNode.valueOf(value));
 	}
 	
 	public static ValueExpression val(String property) {

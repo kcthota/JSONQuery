@@ -2,13 +2,13 @@ package com.kcthota.JSONQuery.expressions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 /**
- * Compares if the passed in value is substring of value of the property
+ * Compares if value of the property ends with the passed in value
  * @author Krishna Chaitanya Thota
  * Apr 26, 2015 12:01:15 AM
  */
-public class SubstringOf extends SimpleComparisonExpression {
+public class EndsWithExpression extends SimpleComparisonExpression {
 
-	public SubstringOf(ValueExpression expression, JsonNode value) {
+	public EndsWithExpression(ValueExpression expression, JsonNode value) {
 		super(expression, value);
 	}
 
@@ -18,6 +18,6 @@ public class SubstringOf extends SimpleComparisonExpression {
 		if(!propertyValue.isTextual() || !value().isTextual()) {
 			return false;
 		}
-		return propertyValue.textValue().contains(value().textValue());
+		return propertyValue.textValue().endsWith(value().textValue());
 	}
 }

@@ -514,4 +514,46 @@ public class QueryTest {
 		result = q.is(and(eq("state","CA"), substringof("name", "Kris")));
 		assertThat(result).isTrue();
 	}
+	
+	@Test
+	public void testStartsWith(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		node.put("state", "CA");
+		
+		Query q = new Query(node);
+		boolean result = q.is(startsWith("name", "Kris"));
+		assertThat(result).isTrue();
+		
+		result = q.is(startsWith("age", "Kris")); //age not a string, returns false
+		assertThat(result).isFalse();
+		
+		result = q.is(not(startsWith("name", "Kris")));
+		assertThat(result).isFalse();
+		
+		result = q.is(or(eq("state","CA"), startsWith("name", "shna")));
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	public void testEndsWith(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("name", "Krishna");
+		node.put("age", 31);
+		node.put("state", "CA");
+		
+		Query q = new Query(node);
+		boolean result = q.is(endsWith("name", "shna"));
+		assertThat(result).isTrue();
+		
+		result = q.is(endsWith("age", "Kris")); //age not a string, returns false
+		assertThat(result).isFalse();
+		
+		result = q.is(not(endsWith("name", "shna")));
+		assertThat(result).isFalse();
+		
+		result = q.is(and(eq("state","CA"), endsWith("name", "shna")));
+		assertThat(result).isTrue();
+	}
 }

@@ -44,7 +44,7 @@ public class ValueExpression implements Expression {
 	
 	
 	/**
-	 * Formats the property name. Example: converts a\.b to a.b.
+	 * Formats the property name. Prepends if / is missing
 	 * @param property
 	 * @return
 	 */
