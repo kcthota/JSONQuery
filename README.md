@@ -3,18 +3,24 @@
 Query JsonNode objects with intuitive expressions.
 
 ##Usage
-The artifacts will soon be available on maven central. 
+Stable Release:
 
-<!--
-Until then you can download from [here] (https://oss.sonatype.org/content/groups/public/com/kcthota/JSONQuery/0.0.1/).
 ```
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 </dependency>
 ```
--->
+Latest Snapshot Release:
+
+```
+<dependency>
+	<groupId>com.kcthota</groupId>
+	<artifactId>JSONQuery</artifactId>
+	<version>0.0.3-SNAPSHOT</version>
+</dependency>
+```
 
 ##Example:
 Consider the following JSON object.
