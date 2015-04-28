@@ -235,6 +235,17 @@ new Query(node).value(trim("age")); //throws UnsupportedExprException, when appe
 
 ```
 
+**To Upper case**
+
+```
+new Query(node).value(upper("name/first")).textValue(); //returns JOHN
+
+new Query(node).value(upper("interests/0")).textValue(); //returns HIKING
+
+new Query(node).value(upper("age")); //throws UnsupportedExprException, when appending to non-string values
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
