@@ -7,6 +7,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.appendTo;
 import static com.kcthota.JSONQuery.expressions.Expr.prependTo;
 import static com.kcthota.JSONQuery.expressions.Expr.eq;
 import static com.kcthota.JSONQuery.expressions.Expr.val;
+import static com.kcthota.JSONQuery.expressions.Expr.trim;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -89,14 +90,38 @@ public class ValueTest {
 		
 		assertThat(q.value(prependTo(val("name/firstName"), "Mr. ")).textValue()).isEqualTo("Mr. Krishna");
 		
-		assertThat(q.value(prependTo(val("name/firstName"), "Mr. ")).textValue()).isEqualTo("Mr. Krishna");
-		
 		assertThat(q.is(eq(prependTo("name/lastName", "1"), "1Thota"))).isTrue();
 		
 		assertThat(q.value(prependTo("interests/0", "hill ")).textValue()).isEqualTo("hill hiking");
 		
 		try {
 			q.value(prependTo("age", "1"));
+			fail("UnsupportedExprException expected when appending to non-string values");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
+		}
+		
+	}
+	
+	@Test
+	public void testTrim(){
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", " Krishna ").put("lastName", " Thota ");
+		node.put("age", 25);
+		node.put("city", "Santa Clara, ");
+		node.putArray("interests").add(" hiking ").add(" biking ");
+		
+		Query q=new Query(node);
+		
+		assertThat(q.value(trim("name/firstName")).textValue()).isEqualTo("Krishna");
+		
+		
+		assertThat(q.is(eq(trim("name/lastName"), "Thota"))).isTrue();
+		
+		assertThat(q.value(appendTo(trim("interests/0"), " hills")).textValue()).isEqualTo("hiking hills");
+		
+		try {
+			q.value(trim("age"));
 			fail("UnsupportedExprException expected when appending to non-string values");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");

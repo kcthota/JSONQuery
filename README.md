@@ -48,7 +48,7 @@ new Query(node).is(eq("name/first", "Jane")); //returns false
 
 new Query(node).is(eq("name/last", "Doe")); //returns true
 
-new Query(node).is(eq("name/interests/1", "hiking")); //returns true
+new Query(node).is(eq("interests/0", "hiking")); //returns true
 
 new Query(node).is(eq(appendTo("state", ", USA"), "CA, USA")); //returns true
 
@@ -181,7 +181,7 @@ new Query(node).value("name"); //returns the JsonNode object for name.
 
 new Query(node).value("city"); //throws MissingNodeException
 
-new Query(node).value("name/interests/1").textValue(); //returns hiking
+new Query(node).value("interests/0").textValue(); //returns hiking
 
 ```
 
@@ -190,7 +190,7 @@ new Query(node).value("name/interests/1").textValue(); //returns hiking
 ```
 new Query(node).value(appendTo("name/first", "K")).textValue(); //returns JohnK
 
-new Query(node).value(appendTo("name/interests/1", " hills")).textValue(); //returns hiking hills
+new Query(node).value(appendTo("interests/0", " hills")).textValue(); //returns hiking hills
 
 new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
 
@@ -201,7 +201,7 @@ new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, 
 ```
 new Query(node).value(prependTo("name/first", "K")).textValue(); //returns KJohn
 
-new Query(node).value(prependTo("name/interests/1", "hill ")).textValue(); //returns hill hiking
+new Query(node).value(prependTo("interests/0", "hill ")).textValue(); //returns hill hiking
 
 new Query(node).value(prependTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
 
@@ -214,12 +214,26 @@ new Query(node).value(val(val("name"),"first")).textValue(); //returns John
 
 new Query(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
 
-new Query(node).value(appendTo(prependTo("name/interests/1", "hill ")," in CA")).textValue(); //returns hill hiking in CA
+new Query(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
 
 ```
 
 
 Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
+
+###Only in SNAPSHOT release
+Following features are newly added and available in latest snapshot release
+
+**Trim**
+
+```
+new Query(node).value(trim("name/first")).textValue(); //returns John
+
+new Query(node).value(trim("interests/0")).textValue(); //returns hiking
+
+new Query(node).value(trim("age")); //throws UnsupportedExprException, when appending to non-string values
+
+```
 
 ## License:
 

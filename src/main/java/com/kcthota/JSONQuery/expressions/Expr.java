@@ -206,4 +206,16 @@ public class Expr {
 	public static ValueExpression prependTo(ValueExpression valExpression, String prependText) {
 		return new PrependToValueExpression(null, prependText, valExpression);
 	}
+	
+	public static ValueExpression trim(String property) {
+		return new TrimValueExpression(property);
+	}
+	
+	public static ValueExpression trim(ValueExpression valExpression, String property) {
+		return new TrimValueExpression(property, valExpression);
+	}
+	
+	public static ValueExpression trim(ValueExpression valExpression) {
+		return new TrimValueExpression(null, valExpression);
+	}
 }
