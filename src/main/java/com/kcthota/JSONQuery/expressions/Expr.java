@@ -230,4 +230,16 @@ public class Expr {
 	public static ValueExpression upper(ValueExpression valExpression) {
 		return new ToUpperValueExpression(null, valExpression);
 	}
+	
+	public static ValueExpression lower(String property) {
+		return new ToLowerValueExpression(property);
+	}
+	
+	public static ValueExpression lower(ValueExpression valExpression, String property) {
+		return new ToLowerValueExpression(property, valExpression);
+	}
+	
+	public static ValueExpression lower(ValueExpression valExpression) {
+		return new ToLowerValueExpression(null, valExpression);
+	}
 }

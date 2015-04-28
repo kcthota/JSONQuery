@@ -246,6 +246,17 @@ new Query(node).value(upper("age")); //throws UnsupportedExprException, when app
 
 ```
 
+**To Lower case**
+
+```
+new Query(node).value(lower("name/first")).textValue(); //returns john
+
+new Query(node).value(lower("interests/0")).textValue(); //returns hiking
+
+new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
