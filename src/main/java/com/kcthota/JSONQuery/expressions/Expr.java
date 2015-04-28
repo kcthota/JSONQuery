@@ -218,4 +218,16 @@ public class Expr {
 	public static ValueExpression trim(ValueExpression valExpression) {
 		return new TrimValueExpression(null, valExpression);
 	}
+	
+	public static ValueExpression upper(String property) {
+		return new ToUpperValueExpression(property);
+	}
+	
+	public static ValueExpression upper(ValueExpression valExpression, String property) {
+		return new ToUpperValueExpression(property, valExpression);
+	}
+	
+	public static ValueExpression upper(ValueExpression valExpression) {
+		return new ToUpperValueExpression(null, valExpression);
+	}
 }
