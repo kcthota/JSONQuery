@@ -13,8 +13,8 @@ public class Query extends AbstractQuery {
 
 	/**
 	 * Verifies if the passed expression is true for the JsonNode
-	 * @param expr
-	 * @return
+	 * @param expr Comparison expression to be evaluated
+	 * @return returns if the expression is true for the JsonNode
 	 */
 	public boolean is(ComparisonExpression expr) {
 		try {
@@ -40,8 +40,8 @@ public class Query extends AbstractQuery {
 	
 	/**
 	 * Gets the value as per expression set from the JsonNode
-	 * @param property
-	 * @return
+	 * @param expression Value expression to be evaluated 
+	 * @return Returns the value for the passed expression
 	 */
 	public JsonNode value(ValueExpression expression) {
 		return expression.evaluate(node);
@@ -49,8 +49,8 @@ public class Query extends AbstractQuery {
 
 	/**
 	 * Checks if property exist in the JsonNode
-	 * @param property
-	 * @return
+	 * @param property JSON property
+	 * @return Returns the value for the passed property
 	 */
 	public boolean isExist(String property) {
 		try {

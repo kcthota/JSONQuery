@@ -26,6 +26,11 @@ public class ValueExpression implements Expression {
 		this.property = property;
 	}
 	
+	/**
+	 * Evaluates the expression on passed JSONNode
+	 * @param node JSONNode object
+	 * @return returns the value of the property
+	 */
 	public JsonNode evaluate(JsonNode node) {
 		if(innerExpression==null) {
 			return getValue(node, property);
@@ -36,9 +41,9 @@ public class ValueExpression implements Expression {
 	
 	/**
 	 * Fetches the value for a property from the passed JsonNode. Throws MissingNodeException if the property doesn't exist
-	 * @param node
-	 * @param property
-	 * @return
+	 * @param node JSONNode Object
+	 * @param property Property for which the value should be returned
+	 * @return returns the value of the property
 	 */
 	protected JsonNode getValue(JsonNode node, String property) {
 		if(node==null) {
@@ -59,8 +64,8 @@ public class ValueExpression implements Expression {
 	
 	/**
 	 * Formats the property name. Prepends if / is missing
-	 * @param property
-	 * @return
+	 * @param property JSONPointer string
+	 * @return Format the property name. Prepends / if missing
 	 */
 	protected String formatPropertyName(String property) {
 		if(!property.startsWith("/")) {

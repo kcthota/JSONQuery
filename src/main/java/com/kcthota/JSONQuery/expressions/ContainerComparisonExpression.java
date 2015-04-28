@@ -23,7 +23,7 @@ public abstract class ContainerComparisonExpression implements ComparisonExpress
 
 	/**
 	 * Returns list of current expressions
-	 * @return
+	 * @return returns the list of comparison expressions set to the expression
 	 */
 	public List<ComparisonExpression> getExpressions() {
 
@@ -32,7 +32,7 @@ public abstract class ContainerComparisonExpression implements ComparisonExpress
 
 	/**
 	 * Adds new expressions to the existing expression
-	 * @param expressions
+	 * @param expressions Sets the passed expressions to the container expression
 	 */
 	public void add(ComparisonExpression... expressions) {
 		this.expressions.addAll(Arrays.asList(expressions));

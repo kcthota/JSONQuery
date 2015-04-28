@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public interface ComparisonExpression extends Expression {
 	/**
 	 * Evalutes the comparison expression on the passed JsonNode
-	 * @param node
+	 * @param node JSONNode object on which the expression should be evaluated
 	 * @return Result of the comparison
 	 */
 	public boolean evaluate(JsonNode node);
