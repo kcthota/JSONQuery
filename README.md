@@ -283,6 +283,23 @@ new Query(node).value(lower("age")); //throws UnsupportedExprException, when app
 
 ```
 
+## Filter
+
+Allows filtering objects in an ArrayNode as per passed in expression
+
+```
+Query.q(node).filter("interests", eq((String)null, "hiking"); //returns a new ArrayNode, ["hiking"]
+
+Query.q(node).filter("interests", ne((String)null, "hiking"); //returns ["biking"]
+
+Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))); //returns ["hiking", "biking"]
+
+Query.q(ArrayNode).filter(not(Null("address")); //returns array of objects with address property not null
+
+Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))).value("0").textValue(); //returns hiking
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
