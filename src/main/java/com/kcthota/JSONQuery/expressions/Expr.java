@@ -242,4 +242,16 @@ public class Expr {
 	public static ValueExpression lower(ValueExpression valExpression) {
 		return new ToLowerValueExpression(null, valExpression);
 	}
+	
+	public static ValueExpression replace(String property, String target, String replacement) {
+		return new ReplaceValueExpression(property, target, replacement);
+	}
+	
+	public static ValueExpression replace(ValueExpression valExpression, String property, String target, String replacement) {
+		return new ReplaceValueExpression(property, target, replacement, valExpression);
+	}
+	
+	public static ValueExpression replace(ValueExpression valExpression, String target, String replacement) {
+		return new ReplaceValueExpression(null, target, replacement, valExpression);
+	}
 }
