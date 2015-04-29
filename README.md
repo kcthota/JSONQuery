@@ -42,130 +42,130 @@ Checks if the passed in expression is true for the object.
 
 **Equals**
 ```
-new Query(node).is(eq("state", "CA")); //returns true
+Query.q(node).is(eq("state", "CA")); //returns true
 
-new Query(node).is(eq("name/first", "Jane")); //returns false
+Query.q(node).is(eq("name/first", "Jane")); //returns false
 
-new Query(node).is(eq("name/last", "Doe")); //returns true
+Query.q(node).is(eq("name/last", "Doe")); //returns true
 
-new Query(node).is(eq("interests/0", "hiking")); //returns true
+Query.q(node).is(eq("interests/0", "hiking")); //returns true
 
-new Query(node).is(eq(appendTo("state", ", USA"), "CA, USA")); //returns true
+Query.q(node).is(eq(appendTo("state", ", USA"), "CA, USA")); //returns true
 
 ```
 
 **Not Equals**
 
 ```
-new Query(node).is(ne("state", "CA")); //returns false
+Query.q(node).is(ne("state", "CA")); //returns false
 
-new Query(node).is(ne("name/first", "Jane")); //returns true
+Query.q(node).is(ne("name/first", "Jane")); //returns true
 
-new Query(node).is(ne("age", 35)); //returns true
+Query.q(node).is(ne("age", 35)); //returns true
 
-new Query(node).is(ne(prependTo("state", "1"), "CA")); //returns true
+Query.q(node).is(ne(prependTo("state", "1"), "CA")); //returns true
 
 ```
 
 **Greater than**
 
 ```
-new Query(node).is(gt("age", 31)); //returns false
+Query.q(node).is(gt("age", 31)); //returns false
 ```
 
 **Less than**
 
 ```
-new Query(node).is(lt("age", 32)); //returns true
+Query.q(node).is(lt("age", 32)); //returns true
 ```
 
 **Greater than or Equal to**
 
 ```
-new Query(node).is(ge("age", 31)); //returns true
+Query.q(node).is(ge("age", 31)); //returns true
 ```
 
 **Less than or Equal to**
 
 ```
-new Query(node).is(le("age", 32)); //returns true
+Query.q(node).is(le("age", 32)); //returns true
 ```
 
 **Null**
 
 ```
-new Query(node).is(Null("state")); //returns false
+Query.q(node).is(Null("state")); //returns false
 ```
 
 **Not**
 
 ```
-new Query(node).is(not(eq("state", "CA"))); //returns false
+Query.q(node).is(not(eq("state", "CA"))); //returns false
 
-new Query(node).is(not(eq("name/first", "Jane"))); //returns true
+Query.q(node).is(not(eq("name/first", "Jane"))); //returns true
 
-new Query(node).is(not(eq("name/last", "Doe"))); //returns false
+Query.q(node).is(not(eq("name/last", "Doe"))); //returns false
 
-new Query(node).is(not(Null("state"))); //returns true
+Query.q(node).is(not(Null("state"))); //returns true
 ```
 
 **AND**
 
 ```
-new Query(node).is(and(eq("name/first", "John"), eq("age",31))); //returns true
+Query.q(node).is(and(eq("name/first", "John"), eq("age",31))); //returns true
 
-new Query(node).is(and(eq("name/first", "John"), ne("age",31))); //returns false
+Query.q(node).is(and(eq("name/first", "John"), ne("age",31))); //returns false
 ```
 
 **OR**
 
 ```
-new Query(node).is(or(eq("name/first", "John"), eq("age",31))); //returns true
+Query.q(node).is(or(eq("name/first", "John"), eq("age",31))); //returns true
 
-new Query(node).is(or(eq("name/first", "John"), ne("age",31))); //returns true
+Query.q(node).is(or(eq("name/first", "John"), ne("age",31))); //returns true
 ```
 
 **Multiple AND/OR**
 
 ```
-new Query(node).is(or(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns true
+Query.q(node).is(or(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns true
 
-new Query(node).is(and(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
+Query.q(node).is(and(and(eq("name/first", "John"), eq("age",31)), eq("state", "FL"))); //returns false
 ```
 
 **Substring Of**
 
 ```
-new Query(node).is(substringof("name/first", "Jo")); //returns true
+Query.q(node).is(substringof("name/first", "Jo")); //returns true
 
-new Query(node).is(substringof("age", "Jo")); //returns false, age value is not string
+Query.q(node).is(substringof("age", "Jo")); //returns false, age value is not string
 ```
 
 **Starts With**
 
 ```
-new Query(node).is(startsWith("name/first", "Jo")); //returns true
+Query.q(node).is(startsWith("name/first", "Jo")); //returns true
 
-new Query(node).is(startsWith("age", "Jo")); //returns false, age value is not string
+Query.q(node).is(startsWith("age", "Jo")); //returns false, age value is not string
 ```
 
 **Ends With**
 
 ```
-new Query(node).is(endsWith("name/first", "Jo")); //returns false
+Query.q(node).is(endsWith("name/first", "Jo")); //returns false
 
-new Query(node).is(endsWith("age", "Jo")); //returns false, age value is not string
+Query.q(node).is(endsWith("age", "Jo")); //returns false, age value is not string
 ```
 
 ###isExist
 Checks if property exist for the JsonNode.
 
 ```
-new Query(node).isExist("age"); //returns true
+Query.q(node).isExist("age"); //returns true
 
-new Query(node).isExist("name1"); //returns false
+Query.q(node).isExist("name1"); //returns false
 
-new Query(node).isExist("name/middle"); //returns false
+Query.q(node).isExist("name/middle"); //returns false
 
 ```
 
@@ -175,46 +175,46 @@ Retrieves the value of a property in the JsonNode
 **as is**
 
 ```
-new Query(node).value("name/first").textValue(); //returns John
+Query.q(node).value("name/first").textValue(); //returns John
 
-new Query(node).value("name"); //returns the JsonNode object for name.
+Query.q(node).value("name"); //returns the JsonNode object for name.
 
-new Query(node).value("city"); //throws MissingNodeException
+Query.q(node).value("city"); //throws MissingNodeException
 
-new Query(node).value("interests/0").textValue(); //returns hiking
+Query.q(node).value("interests/0").textValue(); //returns hiking
 
 ```
 
 **Append to**
 
 ```
-new Query(node).value(appendTo("name/first", "K")).textValue(); //returns JohnK
+Query.q(node).value(appendTo("name/first", "K")).textValue(); //returns JohnK
 
-new Query(node).value(appendTo("interests/0", " hills")).textValue(); //returns hiking hills
+Query.q(node).value(appendTo("interests/0", " hills")).textValue(); //returns hiking hills
 
-new Query(node).value(appendTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(appendTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **Prepend to**
 
 ```
-new Query(node).value(prependTo("name/first", "K")).textValue(); //returns KJohn
+Query.q(node).value(prependTo("name/first", "K")).textValue(); //returns KJohn
 
-new Query(node).value(prependTo("interests/0", "hill ")).textValue(); //returns hill hiking
+Query.q(node).value(prependTo("interests/0", "hill ")).textValue(); //returns hill hiking
 
-new Query(node).value(prependTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(prependTo("age", "K")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **Value Expression Combinations**
 
 ```
-new Query(node).value(val(val("name"),"first")).textValue(); //returns John
+Query.q(node).value(val(val("name"),"first")).textValue(); //returns John
 
-new Query(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
+Query.q(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
 
-new Query(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
+Query.q(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
 
 ```
 
@@ -227,59 +227,59 @@ Following features are newly added and available in latest snapshot release
 **Trim**
 
 ```
-new Query(node).value(trim("name/first")).textValue(); //returns John
+Query.q(node).value(trim("name/first")).textValue(); //returns John
 
-new Query(node).value(trim("interests/0")).textValue(); //returns hiking
+Query.q(node).value(trim("interests/0")).textValue(); //returns hiking
 
-new Query(node).value(trim("age")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(trim("age")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **To Upper case**
 
 ```
-new Query(node).value(upper("name/first")).textValue(); //returns JOHN
+Query.q(node).value(upper("name/first")).textValue(); //returns JOHN
 
-new Query(node).value(upper("interests/0")).textValue(); //returns HIKING
+Query.q(node).value(upper("interests/0")).textValue(); //returns HIKING
 
-new Query(node).value(upper("age")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(upper("age")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **To Lower case**
 
 ```
-new Query(node).value(lower("name/first")).textValue(); //returns john
+Query.q(node).value(lower("name/first")).textValue(); //returns john
 
-new Query(node).value(lower("interests/0")).textValue(); //returns hiking
+Query.q(node).value(lower("interests/0")).textValue(); //returns hiking
 
-new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **Replace**
 
 ```
-new Query(node).value(replace("name/first", "John", "Jane")).textValue(); //returns Jane
+Query.q(node).value(replace("name/first", "John", "Jane")).textValue(); //returns Jane
 
-new Query(node).value(replace("interests/0", "hik", "bik")).textValue(); //returns biking
+Query.q(node).value(replace("interests/0", "hik", "bik")).textValue(); //returns biking
 
-new Query(node).value(replace("interests/0", "zzz", "")).textValue(); //unchanged without match, returns hiking
+Query.q(node).value(replace("interests/0", "zzz", "")).textValue(); //unchanged without match, returns hiking
 
-new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
 **Substring**
 
 ```
-new Query(node).value(substring("name/first", 1)).textValue(); //returns ohn
+Query.q(node).value(substring("name/first", 1)).textValue(); //returns ohn
 
-new Query(node).value(substring("interests/0", 0, 2)).textValue(); //returns hi
+Query.q(node).value(substring("interests/0", 0, 2)).textValue(); //returns hi
 
-new Query(node).value(substring("interests/0", 2, 100)).textValue(); //caps to max length and returns king
+Query.q(node).value(substring("interests/0", 2, 100)).textValue(); //caps to max length and returns king
 
-new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+Query.q(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
 
 ```
 
