@@ -270,6 +270,19 @@ new Query(node).value(lower("age")); //throws UnsupportedExprException, when app
 
 ```
 
+**Substring**
+
+```
+new Query(node).value(substring("name/first", 1)).textValue(); //returns ohn
+
+new Query(node).value(substring("interests/0", 0, 2)).textValue(); //returns hi
+
+new Query(node).value(substring("interests/0", 2, 100)).textValue(); //caps to max length and returns king
+
+new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
