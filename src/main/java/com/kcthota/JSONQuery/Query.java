@@ -1,6 +1,10 @@
 package com.kcthota.JSONQuery;
 
+import java.util.Iterator;
+
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
 import com.kcthota.JSONQuery.expressions.ValueExpression;
@@ -59,5 +63,42 @@ public class Query extends AbstractQuery {
 			return false;
 		}
 		return true;
+	}
+	
+	public ArrayNode filter(ComparisonExpression expression) {
+		
+		ArrayNode result = new ObjectMapper().createArrayNode();
+		if(node.isArray()) {
+			Iterator<JsonNode> iterator = node.iterator();
+			while(iterator.hasNext()) {
+				JsonNode curNode = iterator.next();
+				if(new Query(curNode).is(expression)) {
+					result.add(curNode);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public ArrayNode filter(String property, ComparisonExpression expression) {
+		
+		ArrayNode result = new ObjectMapper().createArrayNode();
+		
+		JsonNode propValueNode = this.value(property);
+		
+		if(propValueNode.isArray()) {
+			Iterator<JsonNode> iterator = propValueNode.iterator();
+			while(iterator.hasNext()) {
+				JsonNode curNode = iterator.next();
+				if(new Query(curNode).is(expression)) {
+					result.add(curNode);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static Query q(JsonNode node) {
+		return new Query(node);
 	}
 }

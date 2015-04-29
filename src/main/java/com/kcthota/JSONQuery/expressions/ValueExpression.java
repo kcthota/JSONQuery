@@ -32,6 +32,10 @@ public class ValueExpression implements Expression {
 	 * @return returns the value of the property
 	 */
 	public JsonNode evaluate(JsonNode node) {
+		if(property==null) {
+			return node;
+		}
+		
 		if(innerExpression==null) {
 			return getValue(node, property);
 		} else {
