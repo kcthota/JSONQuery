@@ -257,6 +257,19 @@ new Query(node).value(lower("age")); //throws UnsupportedExprException, when app
 
 ```
 
+**Replace**
+
+```
+new Query(node).value(replace("name/first", "John", "Jane")).textValue(); //returns Jane
+
+new Query(node).value(replace("interests/0", "hik", "bik")).textValue(); //returns biking
+
+new Query(node).value(replace("interests/0", "zzz", "")).textValue(); //unchanged without match, returns hiking
+
+new Query(node).value(lower("age")); //throws UnsupportedExprException, when appending to non-string values
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
