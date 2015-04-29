@@ -254,4 +254,29 @@ public class Expr {
 	public static ValueExpression replace(ValueExpression valExpression, String target, String replacement) {
 		return new ReplaceValueExpression(null, target, replacement, valExpression);
 	}
+	
+	public static ValueExpression substring(String property, int startIndex) {
+		return new SubstringValueExpression(property, startIndex, null);
+	}
+	
+	public static ValueExpression substring(String property, int startIndex, int endIndex) {
+		return new SubstringValueExpression(property, startIndex, endIndex);
+	}
+	
+	public static ValueExpression substring(ValueExpression valExpression, String property, int startIndex) {
+		return new SubstringValueExpression(property, startIndex, null, valExpression);
+	}
+	
+	public static ValueExpression substring(ValueExpression valExpression, String property, int startIndex, int endIndex) {
+		return new SubstringValueExpression(property, startIndex, endIndex, valExpression);
+	}
+	
+	public static ValueExpression substring(ValueExpression valExpression, int startIndex) {
+		return new SubstringValueExpression(null, startIndex, null, valExpression);
+	}
+	
+	public static ValueExpression substring(ValueExpression valExpression, int startIndex, int endIndex) {
+		return new SubstringValueExpression(null, startIndex, endIndex, valExpression);
+	}
+	
 }
