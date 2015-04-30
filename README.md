@@ -9,7 +9,7 @@ Stable Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 </dependency>
 ```
 Latest Snapshot Release:
@@ -18,7 +18,7 @@ Latest Snapshot Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -207,23 +207,6 @@ Query.q(node).value(prependTo("age", "K")); //throws UnsupportedExprException, w
 
 ```
 
-**Value Expression Combinations**
-
-```
-Query.q(node).value(val(val("name"),"first")).textValue(); //returns John
-
-Query.q(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
-
-Query.q(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
-
-```
-
-
-Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
-
-###Only in SNAPSHOT release
-Following features are newly added and available in latest snapshot release
-
 **Trim**
 
 ```
@@ -283,6 +266,17 @@ Query.q(node).value(lower("age")); //throws UnsupportedExprException, when appen
 
 ```
 
+**Value Expression Combinations**
+
+```
+Query.q(node).value(val(val("name"),"first")).textValue(); //returns John
+
+Query.q(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
+
+Query.q(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
+
+```
+
 ## Filter
 
 Allows filtering objects in an ArrayNode as per passed in expression
@@ -299,6 +293,13 @@ Query.q(ArrayNode).filter(not(Null("address")); //returns array of objects with 
 Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))).value("0").textValue(); //returns hiking
 
 ```
+
+Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
+
+<!--
+###Only in SNAPSHOT release
+Following features are newly added and available in latest snapshot release
+-->
 
 ## License:
 
