@@ -13,6 +13,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.lower;
 import static com.kcthota.JSONQuery.expressions.Expr.replace;
 import static com.kcthota.JSONQuery.expressions.Expr.substring;
 import static com.kcthota.JSONQuery.expressions.Expr.length;
+import static com.kcthota.JSONQuery.expressions.Expr.indexof;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -263,5 +264,30 @@ public class ValueTest {
 		assertThat(q.value(length(null))).isEqualTo(4);
 		
 		assertThat(q.value(length("age"))).isEqualTo(0);
+	}
+	
+	@Test
+	public void testIndexofExpression() {
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
+		node.put("age", 25);
+		node.put("city", "Santa Clara");
+		node.putArray("interests").add("hiking").add("biking");
+		
+		Query q = Query.q(node);
+		
+		assertThat(q.value(indexof("city", "San"))).isEqualTo(0);
+		
+		assertThat(q.value(indexof("city", " "))).isEqualTo(5);
+		
+		assertThat(q.value(indexof("city", null))).isEqualTo(-1); //string value is null
+		
+		assertThat(q.value(indexof("name/firstName", "s"))).isEqualTo(3);
+		
+		assertThat(q.value(indexof("interests/1","ing"))).isEqualTo(3);
+		
+		assertThat(q.value(indexof("age", "25"))).isEqualTo(-1); //not a string value
+		
+		assertThat(q.value(indexof("name", "Krishna"))).isEqualTo(-1); //not a string value
 	}
 }
