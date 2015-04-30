@@ -296,10 +296,24 @@ Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null
 
 Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
 
-<!--
+
 ###Only in SNAPSHOT release
+
 Following features are newly added and available in latest snapshot release
--->
+
+**length**
+
+```
+
+Query.q(node).value(length("name/firstName")); //returns 4; len(John)
+
+Query.q(node).value(length(null)); //returns 4, number of fields in object node
+
+Query.q(node).value(length("interests")); //returns 2, number of elements in array
+
+Query.q(node).value(length("age")); //returns 0, if property value is not an array, object or string
+
+```
 
 ## License:
 
