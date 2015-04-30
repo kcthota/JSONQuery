@@ -315,6 +315,22 @@ Query.q(node).value(length("age")); //returns 0, if property value is not an arr
 
 ```
 
+**indexof**
+
+```
+
+Query.q(node).value(indexof("name/firstName", "J")); //returns 0
+
+Query.q(node).value(indexof("name/firstName", null)); //returns -1, indexof str is null
+
+Query.q(node).value(indexof("interests/0", "iking")); //returns 1
+
+Query.q(node).value(indexof("interests", "hiking")); //returns -1, interests is an array, not a string
+
+Query.q(node).value(indexof("age", "24")); //returns -1, property value is not string
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)
