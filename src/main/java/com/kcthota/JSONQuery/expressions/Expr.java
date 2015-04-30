@@ -287,4 +287,12 @@ public class Expr {
 		return new LengthValueExpression(property, valExpression);
 	}
 	
+	public static IntegerValueExpression indexof(String property, String str) {
+		return new IndexofValueExpression(property, str);
+	}
+	
+	public static IntegerValueExpression indexof(ValueExpression valExpression, String property, String str) {
+		return new IndexofValueExpression(property, str, valExpression);
+	}
+	
 }
