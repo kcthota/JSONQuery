@@ -12,6 +12,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.upper;
 import static com.kcthota.JSONQuery.expressions.Expr.lower;
 import static com.kcthota.JSONQuery.expressions.Expr.replace;
 import static com.kcthota.JSONQuery.expressions.Expr.substring;
+import static com.kcthota.JSONQuery.expressions.Expr.length;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
+import com.kcthota.JSONQuery.expressions.Expr;
 
 /**
  * @author Krishna Chaitanya Thota
@@ -240,5 +242,26 @@ public class ValueTest {
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
 		}
+	}
+	
+	@Test
+	public void testLengthExpression() {
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.putObject("name").put("firstName", "Krishna").put("lastName", "Thota");
+		node.put("age", 25);
+		node.put("city", "Santa Clara");
+		node.putArray("interests").add("hiking").add("biking");
+		
+		Query q = Query.q(node);
+		
+		assertThat(q.value(length("city"))).isEqualTo(11);
+		
+		assertThat(q.value(length(val("name"), "firstName"))).isEqualTo(7);
+		
+		assertThat(q.value(length("interests"))).isEqualTo(2);
+		
+		assertThat(q.value(length(null))).isEqualTo(4);
+		
+		assertThat(q.value(length("age"))).isEqualTo(0);
 	}
 }

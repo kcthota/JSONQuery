@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 import com.kcthota.JSONQuery.expressions.ComparisonExpression;
+import com.kcthota.JSONQuery.expressions.IntegerValueExpression;
 import com.kcthota.JSONQuery.expressions.ValueExpression;
 
 public class Query extends AbstractQuery {
@@ -50,6 +51,15 @@ public class Query extends AbstractQuery {
 	 */
 	public JsonNode value(ValueExpression expression) {
 		return expression.evaluate(node);
+	}
+	
+	/**
+	 * Returns the integer value as per expression set
+	 * @param expression IntegerValueExpression to be evaluated
+	 * @return Returns the integer value of the result of expression evaluated
+	 */
+	public int value(IntegerValueExpression expression) {
+		return expression.evaluate(node).intValue();
 	}
 
 	/**

@@ -279,4 +279,12 @@ public class Expr {
 		return new SubstringValueExpression(null, startIndex, length, valExpression);
 	}
 	
+	public static IntegerValueExpression length(String property) {
+		return new LengthValueExpression(property);
+	}
+	
+	public static IntegerValueExpression length(ValueExpression valExpression, String property) {
+		return new LengthValueExpression(property, valExpression);
+	}
+	
 }
