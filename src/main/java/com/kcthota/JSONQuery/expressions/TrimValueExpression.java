@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * @author Krishna Chaitanya Thota
  * Apr 25, 2015 8:18:49 PM
  */
-public class TrimValueExpression extends ValueExpression {
+public class TrimValueExpression extends StringValueExpression {
 	
 	
 	public TrimValueExpression(String property) {
@@ -22,7 +22,6 @@ public class TrimValueExpression extends ValueExpression {
 	public TrimValueExpression(String property, ValueExpression innerExpression) {
 		super(property, innerExpression);
 	}
-	
 	
 	public JsonNode evaluate(JsonNode node) {
 		JsonNode valueNode = super.evaluate(node);

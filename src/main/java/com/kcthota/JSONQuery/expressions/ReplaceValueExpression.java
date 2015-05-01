@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * @author Krishna Chaitanya Thota
  * Apr 28, 2015 7:28:45 PM
  */
-public class ReplaceValueExpression extends ValueExpression {
+public class ReplaceValueExpression extends StringValueExpression {
 	
 	private String target = "";
 	private String replacement = "";

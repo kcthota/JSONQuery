@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * @author Krishna Chaitanya Thota
  * Apr 27, 2015 8:26:16 PM
  */
-public class ToLowerValueExpression extends ValueExpression {
+public class ToLowerValueExpression extends StringValueExpression {
 	
 	public ToLowerValueExpression(String property) {
 		super(property);
@@ -32,5 +32,6 @@ public class ToLowerValueExpression extends ValueExpression {
 
 		return TextNode.valueOf(valueNode.textValue().toLowerCase());
 	}
+	
 	
 }

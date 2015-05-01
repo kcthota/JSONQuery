@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * @author Krishna Chaitanya Thota
  * Apr 25, 2015 8:18:49 PM
  */
-public class AppendToValueExpression extends ValueExpression {
+public class AppendToValueExpression extends StringValueExpression {
 	
 	private String appendText = "";
 	

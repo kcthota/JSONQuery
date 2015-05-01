@@ -286,6 +286,8 @@ public class ValueTest {
 		
 		assertThat(q.value(indexof("interests/1","ing"))).isEqualTo(3);
 		
+		assertThat(q.value("interests/"+(length("interests").value(node)-1)).textValue()).isEqualTo("biking");
+		
 		assertThat(q.value(indexof("age", "25"))).isEqualTo(-1); //not a string value
 		
 		assertThat(q.value(indexof("name", "Krishna"))).isEqualTo(-1); //not a string value

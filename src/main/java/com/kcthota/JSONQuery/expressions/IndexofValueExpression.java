@@ -32,7 +32,5 @@ public class IndexofValueExpression extends IntegerValueExpression {
 
 		return IntNode.valueOf(-1);
 	}
-	
-	
 
 }

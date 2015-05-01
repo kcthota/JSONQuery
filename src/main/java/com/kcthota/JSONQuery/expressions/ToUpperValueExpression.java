@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * @author Krishna Chaitanya Thota
  * Apr 27, 2015 8:18:49 PM
  */
-public class ToUpperValueExpression extends ValueExpression {
+public class ToUpperValueExpression extends StringValueExpression {
 	
 	public ToUpperValueExpression(String property) {
 		super(property);

@@ -3,6 +3,8 @@
  */
 package com.kcthota.JSONQuery.expressions;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 /**
  * Expressions which return Integer values only. Example: length, indexof
  * @author Krishna Chaitanya Thota
@@ -18,6 +20,13 @@ public class IntegerValueExpression extends ValueExpression {
 		super(property, innerExpression);
 	}
 	
-	
+	/**
+	 * Returns the final String value of this expression
+	 * @param node
+	 * @return
+	 */
+	public int value(JsonNode node) {
+		return evaluate(node).intValue();
+	}
 
 }

@@ -12,7 +12,7 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
  * 
  * @author Krishna Chaitanya Thota Apr 28, 2015 8:38:07 PM
  */
-public class SubstringValueExpression extends ValueExpression {
+public class SubstringValueExpression extends StringValueExpression {
 
 	private Integer startIndex = 0;
 	private Integer length = null;
