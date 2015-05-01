@@ -21,11 +21,21 @@ public class Query extends AbstractQuery {
 		super(node);
 	}
 
+	/**
+	 * Number of objects in an ArrayNode to be returned from top
+	 * @param value
+	 * @return
+	 */
 	public Query top(Integer value) {
 		this.top = value;
 		return this;
 	}
 
+	/**
+	 * Number of objects in an Arraynode to be skipped from top
+	 * @param value
+	 * @return
+	 */
 	public Query skip(Integer value) {
 		this.skip = value;
 		return this;
@@ -111,7 +121,6 @@ public class Query extends AbstractQuery {
 			Iterator<JsonNode> iterator = node.iterator();
 			int validObjectsCount = 0;
 			while (iterator.hasNext()) {
-
 				JsonNode curNode = iterator.next();
 				if (new Query(curNode).is(expression)) {
 					validObjectsCount++;
@@ -122,9 +131,7 @@ public class Query extends AbstractQuery {
 					if (this.top != null && this.top.intValue() < validObjectsCount) {
 						break;
 					}
-
 					result.add(curNode);
-
 				}
 			}
 		} else {
