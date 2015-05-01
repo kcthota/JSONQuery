@@ -13,10 +13,24 @@ import com.kcthota.JSONQuery.expressions.ValueExpression;
 
 public class Query extends AbstractQuery {
 
+	private Integer top;
+	
+	private Integer skip;
+	
 	public Query(JsonNode node) {
 		super(node);
 	}
 
+	public Query top(Integer value){
+		this.top = value;
+		return this;
+	}
+	
+	public Query skip(Integer value){
+		this.skip = value;
+		return this;
+	}
+	
 	/**
 	 * Verifies if the passed expression is true for the JsonNode
 	 * @param expr Comparison expression to be evaluated
@@ -86,10 +100,29 @@ public class Query extends AbstractQuery {
 		ArrayNode result = new ObjectMapper().createArrayNode();
 		if(node.isArray()) {
 			Iterator<JsonNode> iterator = node.iterator();
+			int validObjectsCount = 0;
 			while(iterator.hasNext()) {
+				
+				
+				
+				
+				
+				
 				JsonNode curNode = iterator.next();
 				if(new Query(curNode).is(expression)) {
+					validObjectsCount++;
+					if(this.skip!=null && this.skip.intValue() > 0 && this.skip.intValue() >= validObjectsCount) {
+						continue;
+					}
+					
+					
+					if(this.top!=null && this.top.intValue() < validObjectsCount) {
+						break;
+					}
+					
 					result.add(curNode);
+					
+					
 				}
 			}
 		} else {
@@ -106,7 +139,7 @@ public class Query extends AbstractQuery {
 	 */
 	public ArrayNode filter(String property, ComparisonExpression expression) {
 		JsonNode propValueNode = this.value(property);
-		return Query.q(propValueNode).filter(expression);
+		return Query.q(propValueNode).top(this.getTop()).skip(this.getSkip()).filter(expression);
 	}
 	
 	/**
@@ -117,4 +150,22 @@ public class Query extends AbstractQuery {
 	public static Query q(JsonNode node) {
 		return new Query(node);
 	}
+
+	public Integer getTop() {
+		return top;
+	}
+
+	public void setTop(Integer top) {
+		this.top = top;
+	}
+
+	public Integer getSkip() {
+		return skip;
+	}
+
+	public void setSkip(Integer skip) {
+		this.skip = skip;
+	}
+	
+	
 }

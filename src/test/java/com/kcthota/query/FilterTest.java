@@ -127,4 +127,50 @@ public class FilterTest {
 		
 		assertThat(Query.q(result).value("1/address").textValue()).isEqualTo("2nd St.");
 	}
+	
+	@Test
+	public void testJSONNodesSkip() {
+		ObjectNode myNode = new ObjectMapper().createObjectNode();
+		myNode.putArray("users").addAll((ArrayNode)node);
+		
+		Query q=new Query(myNode);
+		
+		
+		ArrayNode result = q.skip(1).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(1);
+		
+		assertThat(Query.q(result).value("0/address").textValue()).isEqualTo("2nd St.");
+		
+		result = q.skip(2).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(0);
+		
+		result = q.skip(0).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(2);
+	}
+	
+	@Test
+	public void testJSONNodesTop() {
+		ObjectNode myNode = new ObjectMapper().createObjectNode();
+		myNode.putArray("users").addAll((ArrayNode)node);
+		
+		Query q=new Query(myNode);
+		
+		
+		ArrayNode result = q.top(1).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(1);
+		
+		assertThat(Query.q(result).value("0/address").textValue()).isEqualTo("1st St.");
+		
+		result = q.top(0).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(0);
+		
+		result = q.top(5).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(2);
+	}
 }
