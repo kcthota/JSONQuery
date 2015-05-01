@@ -173,4 +173,27 @@ public class FilterTest {
 		
 		assertThat(result.size()).isEqualTo(2);
 	}
+	
+	@Test
+	public void testJSONNodesSkipAndTop() {
+		ObjectNode myNode = new ObjectMapper().createObjectNode();
+		myNode.putArray("users").addAll((ArrayNode)node);
+		
+		Query q=new Query(myNode);
+		
+		
+		ArrayNode result = q.skip(0).top(1).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(1);
+		
+		assertThat(Query.q(result).value("0/address").textValue()).isEqualTo("1st St.");
+		
+		result = q.skip(1).top(1).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(0);
+		
+		result = q.skip(5).top(5).filter("users", not(Null("address")));
+		
+		assertThat(result.size()).isEqualTo(0);
+	}
 }

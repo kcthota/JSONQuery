@@ -331,6 +331,17 @@ Query.q(node).value(indexof("age", "24")); //returns -1, property value is not s
 
 ```
 
+##Filter Pagination
+
+```
+Query.q(node).skip(1).filter("interests", eq((String)null, "hiking"); //skips the first result
+
+Query.q(node).top(1).filter("interests", eq((String)null, "hiking"); //retuns the first result
+
+Query.q(node).skip(2).top(1).filter("interests", eq((String)null, "hiking"); //returns the first result, skipping 2 objects from top
+
+```
+
 ## License:
 
 Copyright 2015 Krishna Chaitanya Thota (kcthota@gmail.com)

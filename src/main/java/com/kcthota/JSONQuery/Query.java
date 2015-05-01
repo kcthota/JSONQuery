@@ -14,62 +14,68 @@ import com.kcthota.JSONQuery.expressions.ValueExpression;
 public class Query extends AbstractQuery {
 
 	private Integer top;
-	
+
 	private Integer skip;
-	
+
 	public Query(JsonNode node) {
 		super(node);
 	}
 
-	public Query top(Integer value){
+	public Query top(Integer value) {
 		this.top = value;
 		return this;
 	}
-	
-	public Query skip(Integer value){
+
+	public Query skip(Integer value) {
 		this.skip = value;
 		return this;
 	}
-	
+
 	/**
 	 * Verifies if the passed expression is true for the JsonNode
-	 * @param expr Comparison expression to be evaluated
+	 * 
+	 * @param expr
+	 *            Comparison expression to be evaluated
 	 * @return returns if the expression is true for the JsonNode
 	 */
 	public boolean is(ComparisonExpression expr) {
 		try {
-			if(expr!=null) {
+			if (expr != null) {
 				return expr.evaluate(node);
 			}
 		} catch (MissingNodeException e) {
 			return false;
 		}
-		
+
 		return false;
 	}
 
-
 	/**
 	 * Gets the value for the property from the JsonNode
+	 * 
 	 * @param property
 	 * @return
 	 */
 	public JsonNode value(String property) {
 		return value(new ValueExpression(property));
 	}
-	
+
 	/**
 	 * Gets the value as per expression set from the JsonNode
-	 * @param expression Value expression to be evaluated 
+	 * 
+	 * @param expression
+	 *            Value expression to be evaluated
 	 * @return Returns the value for the passed expression
 	 */
 	public JsonNode value(ValueExpression expression) {
 		return expression.evaluate(node);
 	}
-	
+
 	/**
 	 * Returns the integer value as per expression set
-	 * @param expression IntegerValueExpression to be evaluated
+	 * 
+	 * @param expression
+	 *            IntegerValueExpression to be evaluated
 	 * @return Returns the integer value of the result of expression evaluated
 	 */
 	public int value(IntegerValueExpression expression) {
@@ -78,7 +84,9 @@ public class Query extends AbstractQuery {
 
 	/**
 	 * Checks if property exist in the JsonNode
-	 * @param property JSON property
+	 * 
+	 * @param property
+	 *            JSON property
 	 * @return Returns the value for the passed property
 	 */
 	public boolean isExist(String property) {
@@ -89,40 +97,34 @@ public class Query extends AbstractQuery {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Allows filtering values in a ArrayNode as per passed ComparisonExpression
+	 * 
 	 * @param expression
 	 * @return
 	 */
 	public ArrayNode filter(ComparisonExpression expression) {
-		
+
 		ArrayNode result = new ObjectMapper().createArrayNode();
-		if(node.isArray()) {
+		if (node.isArray()) {
 			Iterator<JsonNode> iterator = node.iterator();
 			int validObjectsCount = 0;
-			while(iterator.hasNext()) {
-				
-				
-				
-				
-				
-				
+			while (iterator.hasNext()) {
+
 				JsonNode curNode = iterator.next();
-				if(new Query(curNode).is(expression)) {
+				if (new Query(curNode).is(expression)) {
 					validObjectsCount++;
-					if(this.skip!=null && this.skip.intValue() > 0 && this.skip.intValue() >= validObjectsCount) {
+					if (this.skip != null && this.skip.intValue() > 0 && this.skip.intValue() >= validObjectsCount) {
 						continue;
 					}
-					
-					
-					if(this.top!=null && this.top.intValue() < validObjectsCount) {
+
+					if (this.top != null && this.top.intValue() < validObjectsCount) {
 						break;
 					}
-					
+
 					result.add(curNode);
-					
-					
+
 				}
 			}
 		} else {
@@ -130,9 +132,11 @@ public class Query extends AbstractQuery {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Allows applying filter on a property value, which is ArrayNode, as per passed ComparisonExpression
+	 * Allows applying filter on a property value, which is ArrayNode, as per
+	 * passed ComparisonExpression
+	 * 
 	 * @param property
 	 * @param expression
 	 * @return
@@ -141,9 +145,10 @@ public class Query extends AbstractQuery {
 		JsonNode propValueNode = this.value(property);
 		return Query.q(propValueNode).top(this.getTop()).skip(this.getSkip()).filter(expression);
 	}
-	
+
 	/**
 	 * Spins up a new instance of Query
+	 * 
 	 * @param node
 	 * @return
 	 */
@@ -166,6 +171,5 @@ public class Query extends AbstractQuery {
 	public void setSkip(Integer skip) {
 		this.skip = skip;
 	}
-	
-	
+
 }
