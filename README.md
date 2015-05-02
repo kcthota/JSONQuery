@@ -266,41 +266,6 @@ Query.q(node).value(lower("age")); //throws UnsupportedExprException, when appen
 
 ```
 
-**Value Expression Combinations**
-
-```
-Query.q(node).value(val(val("name"),"first")).textValue(); //returns John
-
-Query.q(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
-
-Query.q(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
-
-```
-
-## Filter
-
-Allows filtering objects in an ArrayNode as per passed in expression
-
-```
-Query.q(node).filter("interests", eq((String)null, "hiking"); //returns a new ArrayNode, ["hiking"]
-
-Query.q(node).filter("interests", ne((String)null, "hiking"); //returns ["biking"]
-
-Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))); //returns ["hiking", "biking"]
-
-Query.q(ArrayNode).filter(not(Null("address")); //returns array of objects with address property not null
-
-Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))).value("0").textValue(); //returns hiking
-
-```
-
-Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
-
-
-###Only in SNAPSHOT release
-
-Following features are newly added and available in latest snapshot release
-
 **length**
 
 ```
@@ -331,6 +296,34 @@ Query.q(node).value(indexof("age", "24")); //returns -1, property value is not s
 
 ```
 
+**Value Expression Combinations**
+
+```
+Query.q(node).value(val(val("name"),"first")).textValue(); //returns John
+
+Query.q(node).value(appendTo(prependTo("name/first", "K"),"C")).textValue(); //returns KJohnC
+
+Query.q(node).value(appendTo(prependTo("interests/0", "hill ")," in CA")).textValue(); //returns hill hiking in CA
+
+```
+
+## Filter
+
+Allows filtering objects in an ArrayNode as per passed in expression
+
+```
+Query.q(node).filter("interests", eq((String)null, "hiking"); //returns a new ArrayNode, ["hiking"]
+
+Query.q(node).filter("interests", ne((String)null, "hiking"); //returns ["biking"]
+
+Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))); //returns ["hiking", "biking"]
+
+Query.q(ArrayNode).filter(not(Null("address")); //returns array of objects with address property not null
+
+Query.q(node).filter("interests", or(eq((String)null, "biking"), eq((String)null, "hiking"))).value("0").textValue(); //returns hiking
+
+```
+
 ##Filter Pagination
 
 ```
@@ -341,6 +334,14 @@ Query.q(node).top(1).filter("interests", eq((String)null, "hiking"); //retuns th
 Query.q(node).skip(2).top(1).filter("interests", eq((String)null, "hiking"); //returns the first result, skipping 2 objects from top
 
 ```
+
+Refer [unit tests] (https://github.com/kcthota/JSONQuery/tree/master/src/test/java/com/kcthota/query) for more examples.
+
+<!--
+###Only in SNAPSHOT release
+
+Following features are newly added and available in latest snapshot release
+-->
 
 ## License:
 
