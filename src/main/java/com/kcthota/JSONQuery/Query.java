@@ -115,23 +115,25 @@ public class Query extends AbstractQuery {
 	 * @return
 	 */
 	public ArrayNode filter(ComparisonExpression expression) {
-
+		
 		ArrayNode result = new ObjectMapper().createArrayNode();
 		if (node.isArray()) {
 			Iterator<JsonNode> iterator = node.iterator();
 			int validObjectsCount = 0;
+			int topCount=0;
 			while (iterator.hasNext()) {
 				JsonNode curNode = iterator.next();
-				if (new Query(curNode).is(expression)) {
+				if (expression==null || (expression!=null && new Query(curNode).is(expression))) {
 					validObjectsCount++;
 					if (this.skip != null && this.skip.intValue() > 0 && this.skip.intValue() >= validObjectsCount) {
 						continue;
 					}
 
-					if (this.top != null && this.top.intValue() < validObjectsCount) {
+					if (this.top != null && topCount >= this.top.intValue()) {
 						break;
 					}
 					result.add(curNode);
+					topCount++;
 				}
 			}
 		} else {
