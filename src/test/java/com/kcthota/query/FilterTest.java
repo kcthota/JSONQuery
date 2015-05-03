@@ -190,10 +190,34 @@ public class FilterTest {
 		
 		result = q.skip(1).top(1).filter("users", not(Null("address")));
 		
-		assertThat(result.size()).isEqualTo(0);
+		assertThat(result.size()).isEqualTo(1);
 		
 		result = q.skip(5).top(5).filter("users", not(Null("address")));
 		
 		assertThat(result.size()).isEqualTo(0);
+		
+		
+	}
+	
+	@Test
+	public void testJSONNodesPagination() {
+		ObjectNode myNode = new ObjectMapper().createObjectNode();
+		myNode.putArray("users").addAll((ArrayNode)node);
+		
+		ArrayNode result = Query.q(myNode).filter("users", null);
+		
+		assertThat(result.size()).isEqualTo(3);
+		
+		result = Query.q(myNode).top(1).filter("users", null);
+		
+		assertThat(result.size()).isEqualTo(1);
+		
+		result = Query.q(myNode).skip(1).filter("users", null);
+		
+		assertThat(result.size()).isEqualTo(2);
+		
+		result = Query.q(myNode).top(1).skip(1).filter("users", null);
+		
+		assertThat(result.size()).isEqualTo(1);
 	}
 }
