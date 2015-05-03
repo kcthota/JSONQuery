@@ -4,16 +4,16 @@
 package com.kcthota.query;
 
 import static com.kcthota.JSONQuery.expressions.Expr.appendTo;
-import static com.kcthota.JSONQuery.expressions.Expr.prependTo;
 import static com.kcthota.JSONQuery.expressions.Expr.eq;
-import static com.kcthota.JSONQuery.expressions.Expr.val;
-import static com.kcthota.JSONQuery.expressions.Expr.trim;
-import static com.kcthota.JSONQuery.expressions.Expr.upper;
+import static com.kcthota.JSONQuery.expressions.Expr.indexof;
+import static com.kcthota.JSONQuery.expressions.Expr.length;
 import static com.kcthota.JSONQuery.expressions.Expr.lower;
+import static com.kcthota.JSONQuery.expressions.Expr.prependTo;
 import static com.kcthota.JSONQuery.expressions.Expr.replace;
 import static com.kcthota.JSONQuery.expressions.Expr.substring;
-import static com.kcthota.JSONQuery.expressions.Expr.length;
-import static com.kcthota.JSONQuery.expressions.Expr.indexof;
+import static com.kcthota.JSONQuery.expressions.Expr.trim;
+import static com.kcthota.JSONQuery.expressions.Expr.upper;
+import static com.kcthota.JSONQuery.expressions.Expr.val;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
-import com.kcthota.JSONQuery.expressions.Expr;
 
 /**
  * @author Krishna Chaitanya Thota

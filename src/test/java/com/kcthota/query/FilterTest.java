@@ -90,7 +90,7 @@ public class FilterTest {
 	@Test
 	public void testJSONNodesFilter1() {
 		
-		Query q=new Query(this.node);
+		Query q=new Query(FilterTest.node);
 		ArrayNode result = q.filter(le("age", 18));
 		
 		assertThat(result.size()).isEqualTo(1);
