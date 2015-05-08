@@ -9,7 +9,7 @@ Stable Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 </dependency>
 ```
 Latest Snapshot Release:
@@ -18,7 +18,7 @@ Latest Snapshot Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 </dependency>
 ```
 
