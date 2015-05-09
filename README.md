@@ -5,7 +5,7 @@ JSONQuery
 [![Coverage Status](https://img.shields.io/coveralls/kcthota/JSONQuery/master.svg)](https://coveralls.io/r/kcthota/JSONQuery?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kcthota/JSONQuery/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/JSONQuery)
 [![Apache 2.0] (https://img.shields.io/github/license/kcthota/JSONQuery.svg)] (http://www.apache.org/licenses/LICENSE-2.0)
-[![Java Doc] (https://img.shields.io/badge/javadoc-0.0.4-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/JSONQuery)
+[![Java Doc] (https://img.shields.io/badge/javadoc-0.0.5-brightgreen.svg)] (http://www.javadoc.io/doc/com.kcthota/JSONQuery)
 
 Query JsonNode objects with intuitive expressions.
 
@@ -16,7 +16,7 @@ Stable Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 </dependency>
 ```
 Latest Snapshot Release:
@@ -25,7 +25,7 @@ Latest Snapshot Release:
 <dependency>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.6-SNAPSHOT</version>
 </dependency>
 ```
 
