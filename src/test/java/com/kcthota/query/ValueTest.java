@@ -153,7 +153,7 @@ public class ValueTest {
 		assertThat(q.value(upper(appendTo("interests/0", " hills"))).textValue()).isEqualTo("HIKING HILLS");
 		
 		try {
-			q.value(trim("age"));
+			q.value(upper("age"));
 			fail("UnsupportedExprException expected when appending to non-string values");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
@@ -179,7 +179,7 @@ public class ValueTest {
 		assertThat(q.value(lower(appendTo("interests/0", " hills"))).textValue()).isEqualTo("hiking hills");
 		
 		try {
-			q.value(trim("age"));
+			q.value(lower("age"));
 			fail("UnsupportedExprException expected when appending to non-string values");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
@@ -208,8 +208,10 @@ public class ValueTest {
 		
 		assertThat(q.is(eq(replace("city", "something", "somethingelse"), "Santa Clara"))).isTrue();
 		
+		assertThat(q.value(replace(lower("name/lastName"), null, "thota", "doe")).textValue()).isEqualTo("doe");
+		
 		try {
-			q.value(trim("age"));
+			q.value(replace("age", "Krish", "Chris"));
 			fail("UnsupportedExprException expected when appending to non-string values");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
@@ -237,7 +239,7 @@ public class ValueTest {
 		
 		
 		try {
-			q.value(trim("age"));
+			q.value(substring("age", 1));
 			fail("UnsupportedExprException expected when appending to non-string values");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Property value is not a string");
