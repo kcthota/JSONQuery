@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
+import com.kcthota.JSONQuery.expressions.StringValueExpression;
 
 /**
  * @author Krishna Chaitanya Thota
@@ -48,6 +49,9 @@ public class ValueTest {
 		assertThat(q.value("interests/1").textValue()).isEqualTo("biking");
 		
 		assertThat(q.value(val(val("name"), "firstName")).textValue()).isEqualTo("Krishna");
+		
+		assertThat(new StringValueExpression("city").value(node)).isEqualTo("Santa Clara");
+		
 	}
 	
 	@Test
@@ -151,6 +155,8 @@ public class ValueTest {
 		assertThat(q.is(eq(upper("name/lastName"), "THOTA"))).isTrue();
 		
 		assertThat(q.value(upper(appendTo("interests/0", " hills"))).textValue()).isEqualTo("HIKING HILLS");
+		
+		//assertThat(upper("name/lastName")).isTrue();
 		
 		try {
 			q.value(upper("age"));

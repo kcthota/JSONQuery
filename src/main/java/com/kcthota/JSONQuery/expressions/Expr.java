@@ -183,99 +183,99 @@ public class Expr {
 		return new ValueExpression(property, valExpression);
 	}
 	
-	public static ValueExpression appendTo(String property, String appendText) {
+	public static AppendToValueExpression appendTo(String property, String appendText) {
 		return new AppendToValueExpression(property, appendText);
 	}
 	
-	public static ValueExpression appendTo(ValueExpression valExpression, String property, String appendText) {
+	public static AppendToValueExpression appendTo(ValueExpression valExpression, String property, String appendText) {
 		return new AppendToValueExpression(property, appendText, valExpression);
 	}
 	
-	public static ValueExpression appendTo(ValueExpression valExpression, String appendText) {
+	public static AppendToValueExpression appendTo(ValueExpression valExpression, String appendText) {
 		return new AppendToValueExpression(null, appendText, valExpression);
 	}
 	
-	public static ValueExpression prependTo(String property, String prependText) {
+	public static PrependToValueExpression prependTo(String property, String prependText) {
 		return new PrependToValueExpression(property, prependText);
 	}
 	
-	public static ValueExpression prependTo(ValueExpression valExpression, String property, String prependText) {
+	public static PrependToValueExpression prependTo(ValueExpression valExpression, String property, String prependText) {
 		return new PrependToValueExpression(property, prependText, valExpression);
 	}
 	
-	public static ValueExpression prependTo(ValueExpression valExpression, String prependText) {
+	public static PrependToValueExpression prependTo(ValueExpression valExpression, String prependText) {
 		return new PrependToValueExpression(null, prependText, valExpression);
 	}
 	
-	public static ValueExpression trim(String property) {
+	public static TrimValueExpression trim(String property) {
 		return new TrimValueExpression(property);
 	}
 	
-	public static ValueExpression trim(ValueExpression valExpression, String property) {
+	public static TrimValueExpression trim(ValueExpression valExpression, String property) {
 		return new TrimValueExpression(property, valExpression);
 	}
 	
-	public static ValueExpression trim(ValueExpression valExpression) {
+	public static TrimValueExpression trim(ValueExpression valExpression) {
 		return new TrimValueExpression(null, valExpression);
 	}
 	
-	public static ValueExpression upper(String property) {
+	public static ToUpperValueExpression upper(String property) {
 		return new ToUpperValueExpression(property);
 	}
 	
-	public static ValueExpression upper(ValueExpression valExpression, String property) {
+	public static ToUpperValueExpression upper(ValueExpression valExpression, String property) {
 		return new ToUpperValueExpression(property, valExpression);
 	}
 	
-	public static ValueExpression upper(ValueExpression valExpression) {
+	public static ToUpperValueExpression upper(ValueExpression valExpression) {
 		return new ToUpperValueExpression(null, valExpression);
 	}
 	
-	public static ValueExpression lower(String property) {
+	public static ToLowerValueExpression lower(String property) {
 		return new ToLowerValueExpression(property);
 	}
 	
-	public static ValueExpression lower(ValueExpression valExpression, String property) {
+	public static ToLowerValueExpression lower(ValueExpression valExpression, String property) {
 		return new ToLowerValueExpression(property, valExpression);
 	}
 	
-	public static ValueExpression lower(ValueExpression valExpression) {
+	public static ToLowerValueExpression lower(ValueExpression valExpression) {
 		return new ToLowerValueExpression(null, valExpression);
 	}
 	
-	public static ValueExpression replace(String property, String target, String replacement) {
+	public static ReplaceValueExpression replace(String property, String target, String replacement) {
 		return new ReplaceValueExpression(property, target, replacement);
 	}
 	
-	public static ValueExpression replace(ValueExpression valExpression, String property, String target, String replacement) {
+	public static ReplaceValueExpression replace(ValueExpression valExpression, String property, String target, String replacement) {
 		return new ReplaceValueExpression(property, target, replacement, valExpression);
 	}
 	
-	public static ValueExpression replace(ValueExpression valExpression, String target, String replacement) {
+	public static ReplaceValueExpression replace(ValueExpression valExpression, String target, String replacement) {
 		return new ReplaceValueExpression(null, target, replacement, valExpression);
 	}
 	
-	public static ValueExpression substring(String property, int startIndex) {
+	public static SubstringValueExpression substring(String property, int startIndex) {
 		return new SubstringValueExpression(property, startIndex, null);
 	}
 	
-	public static ValueExpression substring(String property, int startIndex, int length) {
+	public static SubstringValueExpression substring(String property, int startIndex, int length) {
 		return new SubstringValueExpression(property, startIndex, length);
 	}
 	
-	public static ValueExpression substring(ValueExpression valExpression, String property, int startIndex) {
+	public static SubstringValueExpression substring(ValueExpression valExpression, String property, int startIndex) {
 		return new SubstringValueExpression(property, startIndex, null, valExpression);
 	}
 	
-	public static ValueExpression substring(ValueExpression valExpression, String property, int startIndex, int length) {
+	public static SubstringValueExpression substring(ValueExpression valExpression, String property, int startIndex, int length) {
 		return new SubstringValueExpression(property, startIndex, length, valExpression);
 	}
 	
-	public static ValueExpression substring(ValueExpression valExpression, int startIndex) {
+	public static SubstringValueExpression substring(ValueExpression valExpression, int startIndex) {
 		return new SubstringValueExpression(null, startIndex, null, valExpression);
 	}
 	
-	public static ValueExpression substring(ValueExpression valExpression, int startIndex, int length) {
+	public static SubstringValueExpression substring(ValueExpression valExpression, int startIndex, int length) {
 		return new SubstringValueExpression(null, startIndex, length, valExpression);
 	}
 	
