@@ -259,24 +259,24 @@ public class Expr {
 		return new SubstringValueExpression(property, startIndex, null);
 	}
 	
-	public static SubstringValueExpression substring(String property, int startIndex, int length) {
-		return new SubstringValueExpression(property, startIndex, length);
+	public static SubstringValueExpression substring(String property, int startIndex, int endIndex) {
+		return new SubstringValueExpression(property, startIndex, endIndex);
 	}
 	
 	public static SubstringValueExpression substring(ValueExpression valExpression, String property, int startIndex) {
 		return new SubstringValueExpression(property, startIndex, null, valExpression);
 	}
 	
-	public static SubstringValueExpression substring(ValueExpression valExpression, String property, int startIndex, int length) {
-		return new SubstringValueExpression(property, startIndex, length, valExpression);
+	public static SubstringValueExpression substring(ValueExpression valExpression, String property, int startIndex, int endIndex) {
+		return new SubstringValueExpression(property, startIndex, endIndex, valExpression);
 	}
 	
 	public static SubstringValueExpression substring(ValueExpression valExpression, int startIndex) {
 		return new SubstringValueExpression(null, startIndex, null, valExpression);
 	}
 	
-	public static SubstringValueExpression substring(ValueExpression valExpression, int startIndex, int length) {
-		return new SubstringValueExpression(null, startIndex, length, valExpression);
+	public static SubstringValueExpression substring(ValueExpression valExpression, int startIndex, int endIndex) {
+		return new SubstringValueExpression(null, startIndex, endIndex, valExpression);
 	}
 	
 	public static IntegerValueExpression length(String property) {

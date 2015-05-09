@@ -21,6 +21,7 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("active", true);
+		node.put("longValue", 9223372036854775806l);
 
 		Query q = new Query(node);
 		boolean result = q.is(eq("name", "Krishna"));
@@ -37,6 +38,8 @@ public class QueryTest {
 		assertThat(q.is(eq("missingnode", true))).isFalse();
 
 		assertThat(q.is(null)).isFalse();
+		
+		assertThat(q.is(eq("longValue",9223372036854775806l))).isTrue();
 	}
 
 	@Test
@@ -72,7 +75,8 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("active", true);
-
+		node.put("longValue", 9223372036854775806l);
+		
 		Query q = new Query(node);
 
 		boolean result = q.is(ne("name", "kri"));
@@ -82,6 +86,10 @@ public class QueryTest {
 		assertThat(result).isFalse();
 
 		assertThat(q.is(ne("active", true))).isFalse();
+		
+		assertThat(q.is(ne("missingnode", true))).isFalse();
+		
+		assertThat(q.is(ne("longValue",9223372036854775806l))).isFalse();
 	}
 
 	@Test

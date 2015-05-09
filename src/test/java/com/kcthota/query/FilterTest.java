@@ -231,14 +231,14 @@ public class FilterTest {
 		Query q=new Query(myNode);
 		
 		try {
-			ArrayNode result = q.filter(null, not(Null("address")));
+			q.filter(null, not(Null("address")));
 			fail("UnsupportedExprException expected");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Filters are only supported on ArrayNode objects");
 		}
 		
 		try {
-			ArrayNode result = q.filter("users/0", not(Null("address")));
+			q.filter("users/0", not(Null("address")));
 			fail("UnsupportedExprException expected");
 		} catch(UnsupportedExprException e) {
 			assertThat(e.getMessage()).isEqualTo("Filters are only supported on ArrayNode objects");

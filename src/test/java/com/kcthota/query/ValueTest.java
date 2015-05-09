@@ -112,6 +112,9 @@ public class ValueTest {
 		
 		assertThat(q.value(prependTo("interests/0", "hill ")).textValue()).isEqualTo("hill hiking");
 		
+		
+		assertThat(q.value(prependTo(upper("interests/0"), null, "hill ")).textValue()).isEqualTo("hill HIKING");
+		
 		try {
 			q.value(prependTo("age", "1"));
 			fail("UnsupportedExprException expected when appending to non-string values");
@@ -168,7 +171,7 @@ public class ValueTest {
 		
 		assertThat(q.value(upper(appendTo("interests/0", " hills"))).textValue()).isEqualTo("HIKING HILLS");
 		
-		//assertThat(upper("name/lastName")).isTrue();
+		assertThat(upper(val("interests"), "0").value(node)).isEqualTo("HIKING");
 		
 		try {
 			q.value(upper("age"));
@@ -195,6 +198,8 @@ public class ValueTest {
 		assertThat(q.is(eq(lower("name/lastName"), "thota"))).isTrue();
 		
 		assertThat(q.value(lower(appendTo("interests/0", " hills"))).textValue()).isEqualTo("hiking hills");
+		
+		assertThat(lower(val("interests"), "0").value(node)).isEqualTo("hiking");
 		
 		try {
 			q.value(lower("age"));
@@ -228,6 +233,8 @@ public class ValueTest {
 		
 		assertThat(q.value(replace(lower("name/lastName"), null, "thota", "doe")).textValue()).isEqualTo("doe");
 		
+		assertThat(replace(lower("name/lastName"), "thota", "doe").value(node)).isEqualTo("doe");
+		
 		try {
 			q.value(replace("age", "Krish", "Chris"));
 			fail("UnsupportedExprException expected when appending to non-string values");
@@ -255,7 +262,13 @@ public class ValueTest {
 		
 		assertThat(q.value(lower(substring("interests/0", 3))).textValue()).isEqualTo("ing");
 		
-		assertThat(q.value(substring(lower("city"), 0,5)).textValue()).isEqualTo("santa");
+		assertThat(q.value(substring(lower("city"), 1,5)).textValue()).isEqualTo("anta");
+		
+		assertThat(substring(val("interests"), "0", 1).value(node)).isEqualTo("iking");
+		
+		assertThat(substring(val("interests"), "0", 1, 2).value(node)).isEqualTo("i");
+		
+		assertThat(substring(val("interests/0"), 1).value(node)).isEqualTo("iking");
 		
 		try {
 			q.value(substring("age", 1));

@@ -15,27 +15,27 @@ import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 public class SubstringValueExpression extends StringValueExpression {
 
 	private Integer startIndex = 0;
-	private Integer length = null;
+	private Integer endIndex = null;
 
-	public SubstringValueExpression(String property, Integer startIndex, Integer length) {
+	public SubstringValueExpression(String property, Integer startIndex, Integer endIndex) {
 		super(property);
 		if (startIndex != null) {
 			this.startIndex = startIndex;
 		}
 
-		if (length != null) {
-			this.length = length;
+		if (endIndex != null) {
+			this.endIndex = endIndex;
 		}
 	}
 
-	public SubstringValueExpression(String property, Integer startIndex, Integer length, ValueExpression innerExpression) {
+	public SubstringValueExpression(String property, Integer startIndex, Integer endIndex, ValueExpression innerExpression) {
 		super(property, innerExpression);
 		if (startIndex != null) {
 			this.startIndex = startIndex;
 		}
 
-		if (length != null) {
-			this.length = length;
+		if (endIndex != null) {
+			this.endIndex = endIndex;
 		}
 	}
 
@@ -48,11 +48,11 @@ public class SubstringValueExpression extends StringValueExpression {
 
 		String value = valueNode.textValue();
 
-		if (length == null || (length != null && length > value.length())) {
-			length = value.length();
+		if (endIndex == null || (endIndex != null && endIndex > value.length())) {
+			endIndex = value.length();
 		}
 
-		return TextNode.valueOf(value.substring(startIndex, length));
+		return TextNode.valueOf(value.substring(startIndex, endIndex));
 	}
 
 }
