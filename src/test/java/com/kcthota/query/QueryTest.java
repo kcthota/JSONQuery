@@ -1,15 +1,6 @@
 package com.kcthota.query;
 
 
-import static com.kcthota.JSONQuery.expressions.Expr.Null;
-import static com.kcthota.JSONQuery.expressions.Expr.and;
-import static com.kcthota.JSONQuery.expressions.Expr.eq;
-import static com.kcthota.JSONQuery.expressions.Expr.gt;
-import static com.kcthota.JSONQuery.expressions.Expr.lt;
-import static com.kcthota.JSONQuery.expressions.Expr.ne;
-import static com.kcthota.JSONQuery.expressions.Expr.not;
-import static com.kcthota.JSONQuery.expressions.Expr.or;
-import static com.kcthota.JSONQuery.expressions.Expr.ge;
 import static com.kcthota.JSONQuery.expressions.Expr.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
@@ -22,6 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
+import com.kcthota.JSONQuery.expressions.AndExpression;
 
 public class QueryTest {
 	
@@ -94,8 +86,9 @@ public class QueryTest {
 		ObjectNode node = new ObjectMapper().createObjectNode();
 		node.put("name", "Krishna");
 		node.put("age", 31);
-		
-		boolean result = new Query(node).is(and(eq("name", "Krishna"), eq("age",31)));
+		AndExpression expr = and(eq("name", "Krishna"), eq("age",31));
+		expr.add(ne("age", 30));
+		boolean result = new Query(node).is(expr);
 		assertThat(result).isTrue();
 	}
 	

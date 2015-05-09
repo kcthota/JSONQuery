@@ -15,10 +15,11 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public abstract class ContainerComparisonExpression implements ComparisonExpression {
 
-	private List<ComparisonExpression> expressions = new ArrayList<ComparisonExpression>();
+	private List<ComparisonExpression> expressions;
 
 	public ContainerComparisonExpression(ComparisonExpression... expressions) {
-		this.expressions = Arrays.asList(expressions);
+		this.expressions = new ArrayList<ComparisonExpression>();
+		this.expressions.addAll(Arrays.asList(expressions));
 	}
 
 	/**
