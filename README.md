@@ -1,4 +1,4 @@
-# JSONQuery [![Build Status](https://travis-ci.org/kcthota/JSONQuery.svg?branch=master)](https://travis-ci.org/kcthota/JSONQuery)
+# JSONQuery [![Build Status](https://travis-ci.org/kcthota/JSONQuery.svg?branch=master)](https://travis-ci.org/kcthota/JSONQuery) [![Coverage Status](https://coveralls.io/repos/kcthota/JSONQuery/badge.svg?branch=master)](https://coveralls.io/r/kcthota/JSONQuery?branch=master)
 
 Query JsonNode objects with intuitive expressions.
 
