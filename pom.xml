@@ -89,6 +89,10 @@
 							<goals>
 								<goal>prepare-agent</goal>
 							</goals>
+							<configuration>
+								<destFile>${project.build.directory}/coverage-reports/jacoco</destFile>
+								<propertyName>surefireArgLine</propertyName>
+							</configuration>
 						</execution>
 						<execution>
 							<id>post-unit-test</id>
@@ -96,6 +100,10 @@
 							<goals>
 								<goal>report</goal>
 							</goals>
+							<configuration>
+								<dataFile>${project.build.directory}/coverage-reports/jacoco</dataFile>
+								<outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
