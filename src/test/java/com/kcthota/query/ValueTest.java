@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
 import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
+import com.kcthota.JSONQuery.expressions.Expr;
 import com.kcthota.JSONQuery.expressions.StringValueExpression;
 
 /**
@@ -326,5 +327,16 @@ public class ValueTest {
 		assertThat(q.value(indexof("name", "Krishna"))).isEqualTo(-1); //not a string value
 		
 		assertThat(indexof(val("city"), null, "Cla").value(node)).isEqualTo(6);
+	}
+	
+	@Test
+	public void testNullNodeOperations(){
+		try {
+			Expr.val("test").evaluate(null);
+			fail("MissingNodeException expected");
+		} catch(MissingNodeException e) {
+			assertThat(e.getMessage()).isEqualTo("test is missing");
+		}
+		
 	}
 }
