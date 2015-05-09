@@ -1,4 +1,4 @@
 language: java
 
 after_success:
- - mvn clean -DserviceJobId=$TRAVIS_JOB_ID -DserviceName=travis-ci test jacoco:report coveralls:report
+ - mvn clean -DserviceJobId=$TRAVIS_JOB_ID -DserviceName=travis-ci cobertura:cobertura coveralls:report

@@ -80,32 +80,15 @@
 					<version>3.1.0</version>
 				</plugin>
 				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.7.2.201409121644</version>
-					<executions>
-						<execution>
-							<id>prepare-agent</id>
-							<goals>
-								<goal>prepare-agent</goal>
-							</goals>
-							<configuration>
-								<destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
-								<propertyName>surefireArgLine</propertyName>
-							</configuration>
-						</execution>
-						<execution>
-							<id>post-unit-test</id>
-							<phase>test</phase>
-							<goals>
-								<goal>report</goal>
-							</goals>
-							<configuration>
-								<dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
-								<outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
-							</configuration>
-						</execution>
-					</executions>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<format>xml</format>
+						<maxmem>256m</maxmem>
+						<!-- aggregated reports for multi-module projects -->
+						<aggregate>true</aggregate>
+					</configuration>
 				</plugin>
 			</plugins>
 
