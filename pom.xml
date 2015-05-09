@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.kcthota</groupId>
 	<artifactId>JSONQuery</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.5</version>
 	<name>JSONQuery</name>
 	<description>Helps querying Jackson JSONNode objects with varieties of expressions</description>
 	<inceptionYear>2015</inceptionYear>
