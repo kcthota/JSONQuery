@@ -237,6 +237,7 @@ public class ValueTest {
 		
 		assertThat(q.value(lower(substring("interests/0", 3))).textValue()).isEqualTo("ing");
 		
+		assertThat(q.value(substring(lower("city"), 0,5)).textValue()).isEqualTo("santa");
 		
 		try {
 			q.value(substring("age", 1));
@@ -292,5 +293,7 @@ public class ValueTest {
 		assertThat(q.value(indexof("age", "25"))).isEqualTo(-1); //not a string value
 		
 		assertThat(q.value(indexof("name", "Krishna"))).isEqualTo(-1); //not a string value
+		
+		assertThat(indexof(val("city"), null, "Cla").value(node)).isEqualTo(6);
 	}
 }
