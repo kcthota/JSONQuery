@@ -10,28 +10,8 @@ package com.kcthota.JSONQuery.exceptions;
 @SuppressWarnings("serial")
 public class MissingNodeException extends RuntimeException {
 
-	public MissingNodeException() {
-		super();
-		
-	}
-
-	public MissingNodeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		
-	}
-
-	public MissingNodeException(String message, Throwable cause) {
-		super(message, cause);
-		
-	}
-
 	public MissingNodeException(String message) {
 		super(message);
 		
 	}
-
-	public MissingNodeException(Throwable cause) {
-		super(cause);
-	}
-	
 }
