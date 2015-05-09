@@ -14,10 +14,6 @@ public class NotExpression implements ComparisonExpression {
 	public NotExpression(ComparisonExpression expr) {
 		this.expression = expr;
 	}
-	
-	public ComparisonExpression getExpression() {
-		return expression;
-	}
 
 
 	@Override

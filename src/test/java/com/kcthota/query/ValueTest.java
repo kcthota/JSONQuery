@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
+import com.kcthota.JSONQuery.exceptions.MissingNodeException;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 import com.kcthota.JSONQuery.expressions.StringValueExpression;
 
@@ -51,6 +52,13 @@ public class ValueTest {
 		assertThat(q.value(val(val("name"), "firstName")).textValue()).isEqualTo("Krishna");
 		
 		assertThat(new StringValueExpression("city").value(node)).isEqualTo("Santa Clara");
+		
+		try {
+			q.value("missingnode").textValue();
+			fail("MissingNodeException expected");
+		} catch(MissingNodeException e) {
+			assertThat(e.getMessage()).isEqualTo("missingnode is missing");
+		}
 		
 	}
 	
@@ -129,6 +137,10 @@ public class ValueTest {
 		assertThat(q.is(eq(trim("name/lastName"), "Thota"))).isTrue();
 		
 		assertThat(q.value(appendTo(trim("interests/0"), " hills")).textValue()).isEqualTo("hiking hills");
+		
+		assertThat(trim(val("interests"),"0").value(node)).isEqualTo("hiking");
+		
+		assertThat(trim(val("city")).value(node)).isEqualTo("Santa Clara,");
 		
 		try {
 			q.value(trim("age"));
