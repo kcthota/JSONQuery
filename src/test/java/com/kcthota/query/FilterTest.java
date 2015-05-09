@@ -10,6 +10,7 @@ import static com.kcthota.JSONQuery.expressions.Expr.le;
 import static com.kcthota.JSONQuery.expressions.Expr.not;
 import static com.kcthota.JSONQuery.expressions.Expr.or;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.kcthota.JSONQuery.Query;
+import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 /**
  * @author Krishna Chaitanya Thota
  * Apr 28, 2015 9:23:50 PM
@@ -163,7 +165,7 @@ public class FilterTest {
 		
 		assertThat(result.size()).isEqualTo(1);
 		
-		assertThat(Query.q(result).value("0/address").textValue()).isEqualTo("1st St.");
+		assertThat(Query.q(result).value("/0/address").textValue()).isEqualTo("1st St.");
 		
 		result = q.top(0).filter("users", not(Null("address")));
 		
@@ -219,5 +221,30 @@ public class FilterTest {
 		result = Query.q(myNode).top(1).skip(1).filter("users", null);
 		
 		assertThat(result.size()).isEqualTo(1);
+	}
+	
+	@Test
+	public void testFilterOnObjectNode() {
+		ObjectNode myNode = new ObjectMapper().createObjectNode();
+		myNode.putArray("users").addAll((ArrayNode)node);
+		
+		Query q=new Query(myNode);
+		
+		try {
+			ArrayNode result = q.filter(null, not(Null("address")));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Filters are only supported on ArrayNode objects");
+		}
+		
+		try {
+			ArrayNode result = q.filter("users/0", not(Null("address")));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Filters are only supported on ArrayNode objects");
+		}
+		
+		
+		
 	}
 }

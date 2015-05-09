@@ -27,7 +27,7 @@ public class Query extends AbstractQuery {
 	 * @return
 	 */
 	public Query top(Integer value) {
-		this.top = value;
+		setTop(value);
 		return this;
 	}
 
@@ -37,7 +37,7 @@ public class Query extends AbstractQuery {
 	 * @return
 	 */
 	public Query skip(Integer value) {
-		this.skip = value;
+		setSkip(value);
 		return this;
 	}
 
