@@ -3,7 +3,7 @@ JSONQuery
 
 [![Build Status](https://img.shields.io/travis/kcthota/JSONQuery/master.svg)](https://travis-ci.org/kcthota/JSONQuery)
 [![Coverage Status](https://img.shields.io/coveralls/kcthota/JSONQuery/master.svg)](https://coveralls.io/r/kcthota/JSONQuery?branch=master)
-[![Maven Central](https://img.shields.io/maven-central/v/com.kcthota/JSONQuery.svg)](http://search.maven.org/#artifactdetails|com.kcthota|JSONQuery)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.kcthota/JSONQuery/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kcthota/JSONQuery)
 [![Apache 2.0] (https://img.shields.io/github/license/kcthota/JSONQuery.svg)] (http://www.apache.org/licenses/LICENSE-2.0)
 
 Query JsonNode objects with intuitive expressions.
