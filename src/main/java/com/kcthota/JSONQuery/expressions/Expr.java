@@ -310,4 +310,12 @@ public class Expr {
 	public static DoubleValueExpression ceil(ValueExpression valExpression, String property) {
 		return new CeilValueExpression(property, valExpression);
 	}
+	
+	public static DoubleValueExpression floor(String property) {
+		return new FloorValueExpression(property);
+	}
+	
+	public static DoubleValueExpression floor(ValueExpression valExpression, String property) {
+		return new FloorValueExpression(property, valExpression);
+	}
 }
