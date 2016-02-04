@@ -14,6 +14,8 @@ import static com.kcthota.JSONQuery.expressions.Expr.substring;
 import static com.kcthota.JSONQuery.expressions.Expr.trim;
 import static com.kcthota.JSONQuery.expressions.Expr.upper;
 import static com.kcthota.JSONQuery.expressions.Expr.val;
+import static com.kcthota.JSONQuery.expressions.Expr.round;
+import static com.kcthota.JSONQuery.expressions.Expr.ceil;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -338,5 +340,93 @@ public class ValueTest {
 			assertThat(e.getMessage()).isEqualTo("test is missing");
 		}
 		
+	}
+	
+	@Test
+	public void roundValueTest() {
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("salary", 12323.89);
+		node.put("bonus", "122.45");
+		node.put("totalTax", 5000);
+		node.putNull("others");
+		node.putArray("orgs").add("IT").add("Sales");
+		node.putObject("taxes").put("federal", 4000.67).put("state", 999.33);
+		
+		Query q=new Query(node);
+		
+		assertThat(q.value(round("salary"))).isEqualTo(12324);
+		assertThat(q.value(round("bonus"))).isEqualTo(122);
+		assertThat(q.value(round("totalTax"))).isEqualTo(5000);
+		
+		assertThat(q.value(round("taxes/federal"))).isEqualTo(4001);
+		
+		
+		assertThat(q.value(round(val("taxes"), "state"))).isEqualTo(999);
+		
+		try {
+			q.value(round("orgs"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not a number or text to parse to a number");
+		}
+		
+		try {
+			q.value(round("orgs/0"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not parseable to a number");
+		}
+		
+		try {
+			q.value(round("others"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not a number or text to parse to a number");
+		}
+		
+		
+	}
+	
+	@Test
+	public void ceilValueTest() {
+		ObjectNode node = new ObjectMapper().createObjectNode();
+		node.put("salary", 12323.89);
+		node.put("bonus", "122.45");
+		node.put("totalTax", 5000);
+		node.putNull("others");
+		node.putArray("orgs").add("IT").add("Sales");
+		node.putObject("taxes").put("federal", 4000.67).put("state", 999.33);
+		
+		Query q=new Query(node);
+		
+		assertThat(q.value(ceil("salary"))).isEqualTo(12324);
+		assertThat(q.value(ceil("bonus"))).isEqualTo(123);
+		assertThat(q.value(ceil("totalTax"))).isEqualTo(5000);
+		
+		assertThat(q.value(ceil("taxes/federal"))).isEqualTo(4001);
+		
+		
+		assertThat(q.value(ceil(val("taxes"), "state"))).isEqualTo(1000);
+		
+		try {
+			q.value(round("orgs"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not a number or text to parse to a number");
+		}
+		
+		try {
+			q.value(round("orgs/0"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not parseable to a number");
+		}
+		
+		try {
+			q.value(round("others"));
+			fail("UnsupportedExprException expected");
+		} catch(UnsupportedExprException e) {
+			assertThat(e.getMessage()).isEqualTo("Value not a number or text to parse to a number");
+		}
 	}
 }

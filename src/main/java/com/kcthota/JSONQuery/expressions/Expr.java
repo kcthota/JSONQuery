@@ -295,4 +295,19 @@ public class Expr {
 		return new IndexofValueExpression(property, str, valExpression);
 	}
 	
+	public static LongValueExpression round(String property) {
+		return new RoundValueExpression(property);
+	}
+	
+	public static LongValueExpression round(ValueExpression valExpression, String property) {
+		return new RoundValueExpression(property, valExpression);
+	}
+	
+	public static DoubleValueExpression ceil(String property) {
+		return new CeilValueExpression(property);
+	}
+	
+	public static DoubleValueExpression ceil(ValueExpression valExpression, String property) {
+		return new CeilValueExpression(property, valExpression);
+	}
 }
