@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.DoubleNode;
 import com.kcthota.JSONQuery.exceptions.UnsupportedExprException;
 
 /**
- * Ceil the value and returns double value
+ * Floor the value and returns double value
  * @author kc
  *
  */
